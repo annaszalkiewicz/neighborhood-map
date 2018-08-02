@@ -12,11 +12,11 @@ class App extends Component {
 	}
 
 	loadJS = (src) => {
-    const ref = window.document.getElementsByTagName("script")[0];
-    const script = window.document.createElement("script");
-    script.src = src;
-    script.async = true;
-    ref.parentNode.insertBefore(script, ref);
+		const ref = window.document.getElementsByTagName("script")[0];
+		const script = window.document.createElement("script");
+		script.src = src;
+		script.async = true;
+		ref.parentNode.insertBefore(script, ref);
 	}
 
 	initMap = () => {
@@ -72,20 +72,33 @@ class App extends Component {
 			}
 		];
 
-		let map = new window.google.maps.Map( 
+		let map = new window.google.maps.Map(
 			document.getElementById('map'), {
-				zoom: 6, 
-				center: {lat: 51.7730971, lng: 19.4105533} ,
+				zoom: 6,
+				center: { lat: 51.7730971, lng: 19.4105533 },
 				styles: styles,
 				mapTypeControl: false,
-		});
+				zoomControl: true,
+				zoomControlOptions: {
+					position: window.google.maps.ControlPosition.RIGHT_CENTER
+				},
+				scaleControl: true,
+				streetViewControl: true,
+				streetViewControlOptions: {
+					position: window.google.maps.ControlPosition.RIGHT_CENTER
+				},
+				fullscreenControl: true,
+				fullscreenControlOptions: {
+					position: window.google.maps.ControlPosition.RIGHT_CENTER
+				}
+			});
 	}
 	render() {
 		return (
 			<main>
-				<Header/>
+				<Header />
 				<div ref="map" id="map" className="map" role="application"></div>
-				<Footer/>
+				<Footer />
 			</main>
 		);
 	}
