@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from './Header';
 import '../css/App.css';
 
 class App extends Component {
@@ -81,6 +82,7 @@ class App extends Component {
 	render() {
 		return (
 			<main>
+				<Header/>
 				<div ref="map" id="map" className="map" role="application"></div>
 			</main>
 		);
