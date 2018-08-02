@@ -10,7 +10,7 @@ const Header = (() => {
 				National Parks in Poland
 			</h1>
 			<button className="hamburger-button">
-				<i class="material-icons hamburger-menu">menu</i>
+				<i className="material-icons hamburger-menu">menu</i>
 			</button>
 		</header>
 	);

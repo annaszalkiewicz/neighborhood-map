@@ -34,6 +34,10 @@
   font-size: 48px;
   color: #fff;
 }
+.hamburger-button:hover, .hamburger-menu:hover {
+  cursor: pointer;
+  color: #e8a60c;
+}
 
 /* FOOTER */
 
