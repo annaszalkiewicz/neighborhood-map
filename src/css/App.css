@@ -1,4 +1,4 @@
-#root, main, .map {
+#root, main, .app, .map {
   width: 100%;
   height: 100%;
 }
