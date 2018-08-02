@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header';
+import Footer from './Footer';
 import '../css/App.css';
 
 class App extends Component {
@@ -84,6 +85,7 @@ class App extends Component {
 			<main>
 				<Header/>
 				<div ref="map" id="map" className="map" role="application"></div>
+				<Footer/>
 			</main>
 		);
 	}
