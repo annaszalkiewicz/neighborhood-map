@@ -100,10 +100,14 @@ class Map extends Component {
         fullscreenControl: true,
         fullscreenControlOptions: {
           position: window.google.maps.ControlPosition.RIGHT_CENTER
-        }
+        },
       });
     this.setState({ map });
     this.addMarker();
+
+    window.google.maps.event.addListenerOnce(map, 'idle', () => {
+			document.getElementsByTagName('iframe')[0].title = 'Google  Maps';
+		});
 
   }
 
