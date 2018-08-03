@@ -1,188 +1,186 @@
-{
-  "parks": [
-    {
-      "id": "babia-gora",
-      "name": "Babia Góra National Park",
-      "latlng": {
-        "lat": 49.5937423,
-        "lng": 19.5290073
-      }
-    },
-    {
-      "id": "bialowieza",
-      "name": "Białowieża National Park",
-      "latlng": {
-        "lat": 52.7160077,
-        "lng": 23.8427192
-      }
-    },
-    {
-      "id": "biebrza",
-      "name": "Biebrza National Park",
-      "latlng": {
-        "lat": 53.5894175,
-        "lng": 22.8172536
-      }
-    },
-    {
-      "id": "bieszczady",
-      "name": "Bieszczady National Park",
-      "latlng": {
-        "lat": 49.1035079,
-        "lng": 22.6523908
-      }
-    },
-    {
-      "id": "tuchola-forest",
-      "name": "Tuchola Forest National Park",
-      "latlng": {
-        "lat": 53.81517,
-        "lng": 17.5626377
-      }
-    },
-    {
-      "id": "drawa",
-      "name": "Drawa National Park",
-      "latlng": {
-        "lat": 53.0920273,
-        "lng": 15.9558436
-      }
-    },
-    {
-      "id": "gorce",
-      "name": "Gorce National Park",
-      "latlng": {
-        "lat": 49.5608387,
-        "lng": 20.1436318
-      }
-    },
-    {
-      "id": "stolowe-mountains",
-      "name": "Stołowe Mountains National Park",
-      "latlng": {
-        "lat": 50.4601238,
-        "lng": 16.3936671
-      }
-    },
-    {
-      "id": "kampinos",
-      "name": "Kampinos National Park",
-      "latlng": {
-        "lat": 52.298293,
-        "lng": 20.8188953
-      }
-    },
-    {
-      "id": "karkonosze",
-      "name": "Karkonosze National Park",
-      "latlng": {
-        "lat": 50.7874926,
-        "lng": 15.6348538
-      }
-    },
-    {
-      "id": "magura",
-      "name": "Magura National Park",
-      "latlng": {
-        "lat": 49.5092526,
-        "lng": 21.467646
-      }
-    },
-    {
-      "id": "narew",
-      "name": "Narew National Park",
-      "latlng": {
-        "lat": 53.0727652,
-        "lng": 22.8664261
-      }
-    },
-    {
-      "id": "ojcow",
-      "name": "Ojców National Park",
-      "latlng": {
-        "lat": 50.2070516,
-        "lng": 19.8156875
-      }
-    },
-    {
-      "id": "pieniny",
-      "name": "Pieniny National Park",
-      "latlng": {
-        "lat": 49.4191992,
-        "lng": 20.3841528
-      }
-    },
-    {
-      "id": "polesie",
-      "name": "Poleski National Park",
-      "latlng": {
-        "lat": 51.4313866,
-        "lng": 23.1165751
-      }
-    },
-    {
-      "id": "roztocze",
-      "name": "Roztocze National Park",
-      "latlng": {
-        "lat": 50.6001398,
-        "lng": 22.960672
-      }
-    },
-    {
-      "id": "slowinski",
-      "name": "Słowiński National Park",
-      "latlng": {
-        "lat": 54.7001729,
-        "lng": 17.3147426
-      }
-    },
-    {
-      "id": "swietokrzyski",
-      "name": "Świętokrzyski National Park",
-      "latlng": {
-        "lat": 50.896028,
-        "lng": 20.9123603
-      }
-    },
-    {
-      "id": "tatra",
-      "name": "Tatra National Park",
-      "latlng": {
-        "lat": 49.2553227,
-        "lng": 19.9730625
-      }
-    },
-    {
-      "id": "ujscie-warty",
-      "name": "Ujście Warty National Park",
-      "latlng": {
-        "lat": 52.5809088,
-        "lng": 14.691973
-      }
-    },
-    {
-      "id": "wielkopolski",
-      "name": "Wielkopolski National Park",
-      "latlng": {
-        "lat": 52.2693367,
-        "lng": 16.7947561
-      }
-    },
-    {
-      "id": "wigry",
-      "name": "Wigry National Park",
-      "latlng": {
-        "lat": 54.0843331,
-        "lng": 23.0075868
-      }
-    },
-    {
-      "id": "wolin",
-      "name": "Wolin National Park",
-      "latlng": {
-        "lat": 53.8973669,
-        "lng": 14.4838776
-      }
+[
+  {
+    "id": "babia-gora",
+    "name": "Babia Góra National Park",
+    "latlng": {
+      "lat": 49.5937423,
+      "lng": 19.5290073
     }
-  ]
-}
+  },
+  {
+    "id": "bialowieza",
+    "name": "Białowieża National Park",
+    "latlng": {
+      "lat": 52.7160077,
+      "lng": 23.8427192
+    }
+  },
+  {
+    "id": "biebrza",
+    "name": "Biebrza National Park",
+    "latlng": {
+      "lat": 53.5894175,
+      "lng": 22.8172536
+    }
+  },
+  {
+    "id": "bieszczady",
+    "name": "Bieszczady National Park",
+    "latlng": {
+      "lat": 49.1035079,
+      "lng": 22.6523908
+    }
+  },
+  {
+    "id": "tuchola-forest",
+    "name": "Tuchola Forest National Park",
+    "latlng": {
+      "lat": 53.81517,
+      "lng": 17.5626377
+    }
+  },
+  {
+    "id": "drawa",
+    "name": "Drawa National Park",
+    "latlng": {
+      "lat": 53.0920273,
+      "lng": 15.9558436
+    }
+  },
+  {
+    "id": "gorce",
+    "name": "Gorce National Park",
+    "latlng": {
+      "lat": 49.5608387,
+      "lng": 20.1436318
+    }
+  },
+  {
+    "id": "stolowe-mountains",
+    "name": "Stołowe Mountains National Park",
+    "latlng": {
+      "lat": 50.4601238,
+      "lng": 16.3936671
+    }
+  },
+  {
+    "id": "kampinos",
+    "name": "Kampinos National Park",
+    "latlng": {
+      "lat": 52.298293,
+      "lng": 20.8188953
+    }
+  },
+  {
+    "id": "karkonosze",
+    "name": "Karkonosze National Park",
+    "latlng": {
+      "lat": 50.7874926,
+      "lng": 15.6348538
+    }
+  },
+  {
+    "id": "magura",
+    "name": "Magura National Park",
+    "latlng": {
+      "lat": 49.5092526,
+      "lng": 21.467646
+    }
+  },
+  {
+    "id": "narew",
+    "name": "Narew National Park",
+    "latlng": {
+      "lat": 53.0727652,
+      "lng": 22.8664261
+    }
+  },
+  {
+    "id": "ojcow",
+    "name": "Ojców National Park",
+    "latlng": {
+      "lat": 50.2070516,
+      "lng": 19.8156875
+    }
+  },
+  {
+    "id": "pieniny",
+    "name": "Pieniny National Park",
+    "latlng": {
+      "lat": 49.4191992,
+      "lng": 20.3841528
+    }
+  },
+  {
+    "id": "polesie",
+    "name": "Poleski National Park",
+    "latlng": {
+      "lat": 51.4313866,
+      "lng": 23.1165751
+    }
+  },
+  {
+    "id": "roztocze",
+    "name": "Roztocze National Park",
+    "latlng": {
+      "lat": 50.6001398,
+      "lng": 22.960672
+    }
+  },
+  {
+    "id": "slowinski",
+    "name": "Słowiński National Park",
+    "latlng": {
+      "lat": 54.7001729,
+      "lng": 17.3147426
+    }
+  },
+  {
+    "id": "swietokrzyski",
+    "name": "Świętokrzyski National Park",
+    "latlng": {
+      "lat": 50.896028,
+      "lng": 20.9123603
+    }
+  },
+  {
+    "id": "tatra",
+    "name": "Tatra National Park",
+    "latlng": {
+      "lat": 49.2553227,
+      "lng": 19.9730625
+    }
+  },
+  {
+    "id": "ujscie-warty",
+    "name": "Ujście Warty National Park",
+    "latlng": {
+      "lat": 52.5809088,
+      "lng": 14.691973
+    }
+  },
+  {
+    "id": "wielkopolski",
+    "name": "Wielkopolski National Park",
+    "latlng": {
+      "lat": 52.2693367,
+      "lng": 16.7947561
+    }
+  },
+  {
+    "id": "wigry",
+    "name": "Wigry National Park",
+    "latlng": {
+      "lat": 54.0843331,
+      "lng": 23.0075868
+    }
+  },
+  {
+    "id": "wolin",
+    "name": "Wolin National Park",
+    "latlng": {
+      "lat": 53.8973669,
+      "lng": 14.4838776
+    }
+  }
+]
