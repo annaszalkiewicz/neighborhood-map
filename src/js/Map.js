@@ -79,6 +79,15 @@ class Map extends Component {
             "saturation": -60
           }
         ]
+      },
+      {
+        "featureType": "administrative.land_parcel",
+        "elementType": "all",
+        "stylers": [
+          {
+            "visibility": "off"
+          },
+        ]
       }
     ];
 
