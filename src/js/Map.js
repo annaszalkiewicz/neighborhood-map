@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import Modal from 'react-modal';
 import parks from '../data/data.json';
 import icon from '../img/marker.png';
 
@@ -11,8 +12,11 @@ class Map extends Component {
     this.state = {
       map: '',
       markers: [],
-      parks: parks
+      parks: parks,
+      // modalIsOpen: false
     };
+    // this.openModal = this.openModal.bind(this);
+    // this.closeModal = this.closeModal.bind(this);
   }
 
   componentDidMount = () => {
@@ -115,8 +119,8 @@ class Map extends Component {
     this.addMarker();
 
     window.google.maps.event.addListenerOnce(map, 'idle', () => {
-			document.getElementsByTagName('iframe')[0].title = 'Google  Maps';
-		});
+      document.getElementsByTagName('iframe')[0].title = 'Google  Maps';
+    });
 
   }
 
@@ -127,6 +131,7 @@ class Map extends Component {
       // Get the position from the location array.
       let position = parks[i].latlng;
       let title = parks[i].name;
+
       // Create a marker per location, and put into markers array.
       let marker = new window.google.maps.Marker({
         map: map,
@@ -138,13 +143,54 @@ class Map extends Component {
       });
       // Push the marker to our array of markers.
       markers.push(marker);
+
+      // window.google.maps.event.addListener(marker, 'click', () => {this.openModal()});
+
+      let content = `<div class="modal-container">${parks[i].name}</div>`;
+
+    const infoWindow = new window.google.maps.InfoWindow({
+      content: content
+    });
+
+    marker.addListener('click', () => {
+      infoWindow.open(map, marker);
+    });
+
     }
   }
 
+  // openModal = () => {
+
+  //   Modal.setAppElement('#root');
+  //   this.setState({ modalIsOpen: true });
+  // }
+
+  // closeModal() {
+  //   this.setState({ modalIsOpen: false });
+  // }
+
   render() {
+    let { parks } = this.state;
+
     return (
       <main>
         <div ref="map" id="map" className="map" role="application"></div>
+        {/* <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+          contentLabel="onRequestClose Example"
+          className="Modal"
+          overlayClassName="Overlay"
+        >
+          <button className="close-button" onClick={this.closeModal}>
+            <i className="material-icons">close</i>
+          </button>
+          <div className="modal-container">
+            {parks[i].name}
+          </div>
+
+
+        </Modal> */}
       </main>
     );
   }
