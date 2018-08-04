@@ -13,6 +13,7 @@ class Map extends Component {
       map: '',
       markers: [],
       parks: parks,
+      currentInfoWindow: null
       // modalIsOpen: false
     };
     // this.openModal = this.openModal.bind(this);
@@ -125,7 +126,7 @@ class Map extends Component {
   }
 
   addMarker = () => {
-    let { markers, map, parks } = this.state;
+    let { markers, map, parks, currentInfoWindow } = this.state;
 
     for (let i = 0; i < parks.length; i++) {
       // Get the position from the location array.
@@ -153,7 +154,11 @@ class Map extends Component {
     });
 
     marker.addListener('click', () => {
-      infoWindow.open(map, marker);
+      if (currentInfoWindow !== null) {
+        currentInfoWindow.close(map, this); 
+    }
+    infoWindow.open(map, marker); 
+    currentInfoWindow = infoWindow;  
     });
 
     }
