@@ -5,7 +5,13 @@
     "latlng": {
       "lat": 49.5937423,
       "lng": 19.5290073
-    }
+    },
+    "origin": "Babia Góra Massif",
+    "seat": "Zawoja",
+    "area": 33.92,
+    "year": 1933,
+    "telephone": "+48 33 877 51 10",
+    "url": "http://bgpn.pl"
   },
   {
     "id": "bialowieza",
@@ -13,7 +19,13 @@
     "latlng": {
       "lat": 52.7160077,
       "lng": 23.8427192
-    }
+    },
+    "origin": "Białowieża Forest",
+    "seat": "Białowieża",
+    "area": 105.02,
+    "year": 1932,
+    "telephone": "+48 33 877 51 10",
+    "url": "https://www.bpn.com.pl/"
   },
   {
     "id": "biebrza",
@@ -21,7 +33,13 @@
     "latlng": {
       "lat": 53.5894175,
       "lng": 22.8172536
-    }
+    },
+    "origin": "Biebrza River",
+    "seat": "Osowiec-Twierdza near Goniądz",
+    "area": 592.23,
+    "year": 1993,
+    "telephone": "+48 85 738 06 20",
+    "url": "https://www.biebrza.org.pl/"
   },
   {
     "id": "bieszczady",
@@ -29,7 +47,13 @@
     "latlng": {
       "lat": 49.1035079,
       "lng": 22.6523908
-    }
+    },
+    "origin": "Bieszczady Mountains",
+    "seat": "Ustrzyki Górne",
+    "area": 292.01,
+    "year": 1973,
+    "telephone": "+48 13 461 06 10",
+    "url": "https://www.bdpn.pl/"
   },
   {
     "id": "tuchola-forest",
@@ -37,7 +61,13 @@
     "latlng": {
       "lat": 53.81517,
       "lng": 17.5626377
-    }
+    },
+    "origin": "Tuchola Town and Forest",
+    "seat": "Charzykowy near Chojnice",
+    "area": 47.98,
+    "year": 1996,
+    "telephone": "+48 52 398 83 97",
+    "url": "https://http://www.pnbt.com.pl//"
   },
   {
     "id": "drawa",
@@ -45,7 +75,13 @@
     "latlng": {
       "lat": 53.0920273,
       "lng": 15.9558436
-    }
+    },
+    "origin": "Drawa Town and River",
+    "seat": "Drawno",
+    "area": 114.41,
+    "year": 1990,
+    "telephone": "+48 95 768 20 51",
+    "url": "https://dpn.pl/"
   },
   {
     "id": "gorce",
@@ -53,7 +89,13 @@
     "latlng": {
       "lat": 49.5608387,
       "lng": 20.1436318
-    }
+    },
+    "origin": "Gorce Mountains",
+    "seat": "Poręba Wielka",
+    "area": 70.29,
+    "year": 1981,
+    "telephone": "+48 18 331 72 07",
+    "url": "http://www.gorczanskipark.pl/"
   },
   {
     "id": "stolowe-mountains",
@@ -61,7 +103,13 @@
     "latlng": {
       "lat": 50.4601238,
       "lng": 16.3936671
-    }
+    },
+    "origin": "Stołowe Mountains",
+    "seat": "Kudowa Zdrój",
+    "area": 63.40,
+    "year": 1993,
+    "telephone": "+48 74 866 14 36",
+    "url": "http://www.pngs.com.pl/"
   },
   {
     "id": "kampinos",
@@ -69,7 +117,13 @@
     "latlng": {
       "lat": 52.298293,
       "lng": 20.8188953
-    }
+    },
+    "origin": "Kampinos Village and Forest",
+    "seat": "Izabelin near Warsaw",
+    "area": 385.44,
+    "year": 1959,
+    "telephone": "+48 22 722 60 01",
+    "url": "https://kampinoski-pn.gov.pl/"
   },
   {
     "id": "karkonosze",
@@ -77,7 +131,13 @@
     "latlng": {
       "lat": 50.7874926,
       "lng": 15.6348538
-    }
+    },
+    "origin": "Karkonosze Mountains",
+    "seat": "Jelenia Góra",
+    "area": 55.76,
+    "year": 1959,
+    "telephone": "+48 75 755 37 26",
+    "url": "https://kpnmab.pl/"
   },
   {
     "id": "magura",
@@ -85,7 +145,13 @@
     "latlng": {
       "lat": 49.5092526,
       "lng": 21.467646
-    }
+    },
+    "origin": "Magura Wątkowska Mountain Range",
+    "seat": "Krempna",
+    "area": 194.39,
+    "year": 1995,
+    "telephone": "48 13 441 40 99",
+    "url": "http://magurskipn.pl/"
   },
   {
     "id": "narew",
@@ -93,7 +159,13 @@
     "latlng": {
       "lat": 53.0727652,
       "lng": 22.8664261
-    }
+    },
+    "origin": "Narew River",
+    "seat": "Kurowo near Kobylin-Borzymy",
+    "area": 68.10,
+    "year": 1996,
+    "telephone": "+48 85 718 14 17",
+    "url": "https://www.npn.pl/"
   },
   {
     "id": "ojcow",
@@ -101,7 +173,13 @@
     "latlng": {
       "lat": 50.2070516,
       "lng": 19.8156875
-    }
+    },
+    "origin": "Ojców Village",
+    "seat": "Ojców",
+    "area": 21.46,
+    "year": 1956,
+    "telephone": "+48 12 389 20 05",
+    "url": "http://www.ojcowskiparknarodowy.pl/"
   },
   {
     "id": "pieniny",
@@ -109,7 +187,13 @@
     "latlng": {
       "lat": 49.4191992,
       "lng": 20.3841528
-    }
+    },
+    "origin": "Pieniny Mountains",
+    "seat": "Krościenko nad Dunajcem",
+    "area": 23.46,
+    "year": 1932,
+    "telephone": "+48 18 262 56 01",
+    "url": "http://www.pieninypn.pl"
   },
   {
     "id": "polesie",
@@ -117,7 +201,13 @@
     "latlng": {
       "lat": 51.4313866,
       "lng": 23.1165751
-    }
+    },
+    "origin": "Polesie Region",
+    "seat": "Urszulin",
+    "area": 97.62,
+    "year": 1990,
+    "telephone": "+48 82 571 30 71",
+    "url": "http://www.poleskipn.pl"
   },
   {
     "id": "roztocze",
@@ -125,7 +215,13 @@
     "latlng": {
       "lat": 50.6001398,
       "lng": 22.960672
-    }
+    },
+    "origin": "Roztocze (range of hills)",
+    "seat": "Zwierzyniec",
+    "area": 84.83,
+    "year": 1974,
+    "telephone": "+48 84 687 20 66",
+    "url": "http://roztoczanskipn.pl/"
   },
   {
     "id": "slowinski",
@@ -133,7 +229,13 @@
     "latlng": {
       "lat": 54.7001729,
       "lng": 17.3147426
-    }
+    },
+    "origin": "Slovincian tribe",
+    "seat": "Smołdzino near Słupsk",
+    "area": 186.00,
+    "year": 1967,
+    "telephone": "+48 59 811 72 04",
+    "url": "https://slowinskipn.pl/"
   },
   {
     "id": "swietokrzyski",
@@ -141,7 +243,13 @@
     "latlng": {
       "lat": 50.896028,
       "lng": 20.9123603
-    }
+    },
+    "origin": "Świętokrzyskie Mountains",
+    "seat": "Bodzentyn",
+    "area": 76.26,
+    "year": 1950,
+    "telephone": "+48 41 311 51 06",
+    "url": "https://www.swietokrzyskipn.org.pl/"
   },
   {
     "id": "tatra",
@@ -149,7 +257,13 @@
     "latlng": {
       "lat": 49.2553227,
       "lng": 19.9730625
-    }
+    },
+    "origin": "Tatra Mountains",
+    "seat": "Zakopane",
+    "area": 211.64,
+    "year": 1947,
+    "telephone": "+48 18 202 32 00",
+    "url": "https://tpn.pl/"
   },
   {
     "id": "ujscie-warty",
@@ -157,7 +271,13 @@
     "latlng": {
       "lat": 52.5809088,
       "lng": 14.691973
-    }
+    },
+    "origin": "Confluence of the rivers Warta and Oder",
+    "seat": "Chyrzyno near Kostrzyn nad Odrą",
+    "area": 80.38,
+    "year": 2001,
+    "telephone": "+48 95 751 43 38",
+    "url": "https://www.pnujsciewarty.gov.pl/"
   },
   {
     "id": "wielkopolski",
@@ -165,7 +285,13 @@
     "latlng": {
       "lat": 52.2693367,
       "lng": 16.7947561
-    }
+    },
+    "origin": "Wielkopolska (Greater Poland) Region",
+    "seat": "Jeziory near Mosina",
+    "area": 75.84,
+    "year": 1957,
+    "telephone": "+48 61 898 23 00",
+    "url": "http://www.wielkopolskipn.pl/"
   },
   {
     "id": "wigry",
@@ -173,7 +299,13 @@
     "latlng": {
       "lat": 54.0843331,
       "lng": 23.0075868
-    }
+    },
+    "origin": "Wigry Lake",
+    "seat": "Krzywe",
+    "area": 150.86,
+    "year": 1989,
+    "telephone": "+48 87 563 25 40",
+    "url": "http://www.wigry.org.pl/"
   },
   {
     "id": "wolin",
@@ -181,6 +313,12 @@
     "latlng": {
       "lat": 53.8973669,
       "lng": 14.4838776
-    }
+    },
+    "origin": "Wolin Island",
+    "seat": "Misdroy",
+    "area": 109.37,
+    "year": 1960,
+    "telephone": "+48 91 328 07 37",
+    "url": "http://www.wolinpn.pl/"
   }
 ]
