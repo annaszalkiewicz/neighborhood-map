@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import Modal from 'react-modal';
 import parks from '../data/data.json';
 import icon from '../img/marker.png';
 
@@ -13,17 +12,21 @@ class Map extends Component {
       map: '',
       markers: [],
       parks: parks,
-      currentInfoWindow: null
-      // modalIsOpen: false
+      currentInfoWindow: null,
+      images: [],
+      currentPark: {}
     };
-    // this.openModal = this.openModal.bind(this);
-    // this.closeModal = this.closeModal.bind(this);
+    this.fetchImages = this.fetchImages.bind(this);
+    this.addImages = this.addImages.bind(this);
+
   }
 
   componentDidMount = () => {
     window.initMap = this.initMap;
     // Asynchronously load the Google Maps script, passing in the callback reference
     this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyDOCU_cQ_QOo17Gp9x5r2heeFNPR9KOZC4&callback=initMap');
+    this.fetchImages();
+
   }
 
   loadJS = (src) => {
@@ -32,6 +35,38 @@ class Map extends Component {
     script.src = src;
     script.async = true;
     ref.parentNode.insertBefore(script, ref);
+  }
+
+  fetchImages = () => {
+
+    const key = '060c74d545a11b19611116873f118dba';
+    let { currentPark } = this.state;
+
+    fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&tags=${currentPark.name}&per_page=5&page=1&format=json&nojsoncallback=1`)
+      .then(response => response.json())
+      .then((j) => this.addImages())
+      .catch(e => this.requestError(e, 'image'));
+
+  }
+
+  addImages = (j) => {
+
+    let images = j.photos.photo.map((pic) => {
+
+      let path = 'https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '.jpg';
+      return (
+        <img alt="National Parks of Poland" src={path}></img>
+      )
+    })
+    this.setState({ images: images });
+
+    console.log('Success!');
+
+  }
+
+  requestError = (e) => {
+    console.log(e);
+
   }
 
   initMap = () => {
@@ -126,7 +161,7 @@ class Map extends Component {
   }
 
   addMarker = () => {
-    let { markers, map, parks, currentInfoWindow } = this.state;
+    let { markers, map, parks, currentInfoWindow, currentPark } = this.state;
 
     for (let i = 0; i < parks.length; i++) {
       // Get the position from the location array.
@@ -149,53 +184,31 @@ class Map extends Component {
 
       let content = `<div class="modal-container">${parks[i].name}</div>`;
 
-    const infoWindow = new window.google.maps.InfoWindow({
-      content: content
-    });
+      const infoWindow = new window.google.maps.InfoWindow({
+        content: content
+      });
 
-    marker.addListener('click', () => {
-      if (currentInfoWindow !== null) {
-        currentInfoWindow.close(map, this); 
-    }
-    infoWindow.open(map, marker); 
-    currentInfoWindow = infoWindow;  
-    });
+      marker.addListener('click', () => {
+
+        if (currentInfoWindow !== null) {
+          currentInfoWindow.close(map, this);
+        }
+        infoWindow.open(map, marker);
+        currentInfoWindow = infoWindow;
+        this.setState({ currentPark: currentPark });
+      });
 
     }
   }
 
-  // openModal = () => {
-
-  //   Modal.setAppElement('#root');
-  //   this.setState({ modalIsOpen: true });
-  // }
-
-  // closeModal() {
-  //   this.setState({ modalIsOpen: false });
-  // }
-
   render() {
-    let { parks } = this.state;
+    let { currentInfoWindow } = this.state;
 
     return (
       <main>
         <div ref="map" id="map" className="map" role="application"></div>
-        {/* <Modal
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}
-          contentLabel="onRequestClose Example"
-          className="Modal"
-          overlayClassName="Overlay"
-        >
-          <button className="close-button" onClick={this.closeModal}>
-            <i className="material-icons">close</i>
-          </button>
-          <div className="modal-container">
-            {parks[i].name}
-          </div>
+        <div className="gallery"></div>
 
-
-        </Modal> */}
       </main>
     );
   }
