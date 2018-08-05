@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import HamburgerButton from './HamburgerButton';
 import Sidebar from './Sidebar';
 import parks from '../data/data.json';
 import icon from '../img/marker.png';
@@ -240,9 +239,6 @@ class Map extends Component {
     (sidebar.classList.contains('show') ?
     sidebar.classList.remove('show') :
     sidebar.classList.add('show'))
-    // this.setState({
-    //   visible: !this.state.visible
-    // });
 
   }
 
@@ -258,13 +254,15 @@ class Map extends Component {
     return (
       <main>
         <div ref="map" id="map" className="map" role="application"></div>
-        <HamburgerButton 
-          handleMouseUp={this.handleMouseUp}
-        />
+        <button 
+				className="hamburger-button"
+				onMouseUp={this.handleMouseUp}
+			>
+				<i className="material-icons hamburger-menu">menu</i>
+			</button>
         <Sidebar
           parks={parks}
-          handleMouseUp={this.handleMouseUp}
-          menuVisibility={this.state.visible}
+          toggleSidebar={this.toggleSidebar}
         />
         <div className="gallery"></div>
       </main>
