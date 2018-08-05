@@ -180,9 +180,39 @@ class Map extends Component {
       // Push the marker to our array of markers.
       markers.push(marker);
 
-      // window.google.maps.event.addListener(marker, 'click', () => {this.openModal()});
-
-      let content = `<div class="modal-container">${parks[i].name}</div>`;
+      let content = `
+      <h2 class="info-heading">${parks[i].name}</h2>
+      <div class="info-container">
+        <table>
+          <tbody>
+            <tr>
+              <td class="info-heading">Origin:</td>
+              <td class="info-details">${parks[i].origin}</td>
+            </tr>
+            <tr>
+              <td class="info-heading">Seat:</td>
+              <td class="info-details">${parks[i].seat}</td>
+            </tr>
+            <tr>
+              <td class="info-heading">Telephone:</td>
+              <td class="info-details">${parks[i].telephone}</td>
+            </tr>
+            <tr>
+              <td class="info-heading">Website:</td>
+              <td class="info-details"><a href=${parks[i].url}>${parks[i].url}</a></td>
+            </tr>
+            <tr>
+              <td class="info-heading">Area:</td>
+              <td class="info-details">${parks[i].area} km&sup2;</td>
+            </tr>
+            <tr>
+              <td class="info-heading">Established:</td>
+              <td class="info-details">${parks[i].year} year</td>
+            </tr>
+          </tbody>
+        </table>      
+      </div>
+      `;
 
       const infoWindow = new window.google.maps.InfoWindow({
         content: content
@@ -202,7 +232,6 @@ class Map extends Component {
   }
 
   render() {
-    let { currentInfoWindow } = this.state;
 
     return (
       <main>
