@@ -57,6 +57,17 @@
 	font-weight: bold;
 }
 
+/* SIDEBAR */
+
+.sidebar {
+	width: 300px;
+	box-shadow: 0 0 20px #aaa;
+	background-color: #fff;
+	position: absolute;
+	right: 300px;
+	top: 100px;
+}
+
 /* FOOTER */
 
 .footer {
