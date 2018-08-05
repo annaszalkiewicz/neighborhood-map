@@ -9,9 +9,6 @@ const Header = (() => {
 			<h1 className="header-heading">
 				National Parks in Poland
 			</h1>
-			<button className="hamburger-button">
-				<i className="material-icons hamburger-menu">menu</i>
-			</button>
 		</header>
 	);
 });
