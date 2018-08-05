@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Sidebar from './Sidebar';
 import parks from '../data/data.json';
 import icon from '../img/marker.png';
 
@@ -237,6 +238,9 @@ class Map extends Component {
       <main>
         <div ref="map" id="map" className="map" role="application"></div>
         <div className="gallery"></div>
+        <Sidebar 
+					parks={parks}
+				/>
 
       </main>
     );

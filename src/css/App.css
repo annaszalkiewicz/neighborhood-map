@@ -61,11 +61,39 @@
 
 .sidebar {
 	width: 300px;
-	box-shadow: 0 0 20px #aaa;
+	box-shadow: 0 0 20px #111;
 	background-color: #fff;
 	position: absolute;
-	right: 300px;
-	top: 100px;
+	right: 0;
+	top: 75px;
+	padding: 1em;
+}
+.form {
+	display: block;
+	padding-bottom: 1em;
+	border-bottom: solid 1px #04261d;
+}
+.label {
+	text-align: center;
+	display: block;
+	padding: 0 1em 1em 1em;
+	color: #04261d;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+.input {
+	display: block;
+	width: 90%;
+	padding: 1em;
+	border-radius: 5px;
+	border: solid 1px #aaa;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 1em;
+}
+::placeholder {
+	font-family: 'Montserrat', sans-serif;
+	font-style: italic;
+	color: #111;
 }
 
 /* FOOTER */
