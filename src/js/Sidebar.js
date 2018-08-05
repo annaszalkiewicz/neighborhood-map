@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class Sidebar extends Component {
 
 	render() {
+		const { parks } = this.props;
 		return (
 			<aside className="sidebar">
 				<form className="form">
@@ -19,7 +20,9 @@ class Sidebar extends Component {
 					/>
 				</form>
 				<ul className="locations-list">
-				
+					{parks.map((park) => (
+						<li key={park.id} className="list-item">{park.name}</li>
+					))}
 				</ul>
 			</aside>
 		);
