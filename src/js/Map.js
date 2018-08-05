@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import HamburgerButton from './HamburgerButton';
 import Sidebar from './Sidebar';
 import parks from '../data/data.json';
 import icon from '../img/marker.png';
@@ -15,11 +16,12 @@ class Map extends Component {
       parks: parks,
       currentInfoWindow: null,
       images: [],
-      currentPark: {}
+      currentPark: {},
     };
     this.fetchImages = this.fetchImages.bind(this);
     this.addImages = this.addImages.bind(this);
-
+    this.toggleSidebar = this.toggleSidebar.bind(this);
+    this.handleMouseUp = this.handleMouseUp.bind(this);
   }
 
   componentDidMount = () => {
@@ -232,16 +234,39 @@ class Map extends Component {
     }
   }
 
+  toggleSidebar = () => {
+
+    const sidebar = document.getElementById('sidebar');
+    (sidebar.classList.contains('show') ?
+    sidebar.classList.remove('show') :
+    sidebar.classList.add('show'))
+    // this.setState({
+    //   visible: !this.state.visible
+    // });
+
+  }
+
+  handleMouseUp(e) {
+    this.toggleSidebar();
+ 
+    console.log("clicked");
+    e.stopPropagation();
+  }
+
   render() {
 
     return (
       <main>
         <div ref="map" id="map" className="map" role="application"></div>
+        <HamburgerButton 
+          handleMouseUp={this.handleMouseUp}
+        />
+        <Sidebar
+          parks={parks}
+          handleMouseUp={this.handleMouseUp}
+          menuVisibility={this.state.visible}
+        />
         <div className="gallery"></div>
-        <Sidebar 
-					parks={parks}
-				/>
-
       </main>
     );
   }

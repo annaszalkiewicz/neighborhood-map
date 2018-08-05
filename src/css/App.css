@@ -63,7 +63,7 @@
 
 /* SIDEBAR */
 
-.sidebar {
+.sidebar-container {
 	width: 300px;
 	box-shadow: 0 0 20px #111;
 	background-color: #fff;
@@ -74,6 +74,12 @@
 	z-index: 10;
 	height: 68vh;
 	overflow-y: auto;
+	transform: translateX(500px);
+	transition: all 0.3s ease;
+}
+.show {
+	transform: translateX(0);
+	transition: all 0.3s ease;
 }
 .form {
 	display: block;
@@ -120,7 +126,6 @@
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	padding: 0.5em;
 }
 .logo-footer {
 	height: 35px;

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import HamburgerButton from './HamburgerButton';
 
 class Sidebar extends Component {
 
 	render() {
 		const { parks } = this.props;
+
 		return (
-			<div className="sidebar-container">
-				<HamburgerButton/>
+			<div className="sidebar-container" id="sidebar" onMouseUp={this.props.handleMouseUp}>
 				<aside className="sidebar">
 					<form className="form">
 						<label htmlFor="locations-filter" className="label">Filter locations:</label>
