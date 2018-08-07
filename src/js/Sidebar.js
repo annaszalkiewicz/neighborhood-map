@@ -11,7 +11,6 @@ class Sidebar extends Component {
 
 	componentDidMount = () => {
 		let { markers, parks } = this.props;
-		let { filteredMarkers } = this.state;
 
 		this.setState({filteredMarkers: markers, filteredParks: parks});
 
@@ -20,18 +19,26 @@ class Sidebar extends Component {
 
 		this.setState({ query: query });
 		this.filterParks(query);
+
+		if (!query) {
+			this.clearQuery();
+		}
   }
 
   clearQuery = () => {
 
-		let { markers, parks } = this.props;
+		let { markers, parks, map } = this.props;
 
 		this.setState({ query: '', filteredMarkers: markers, filteredParks: parks });
+
+			markers.map((marker) => {
+				marker.setMap(map)
+			})
 
 	}
 
 	filterParks = (query) => {
-		let  { markers, parks } = this.props;
+		let  { markers, parks, map } = this.props;
 
 		let filteredParks, filteredMarkers;
 
@@ -44,25 +51,32 @@ class Sidebar extends Component {
 			this.setState({filteredParks, filteredMarkers});
 
 		} 
-		
-		else {
-			this.setState({filteredParks: parks, filteredMarkers: markers});
-		}
 
-		this.showFilteredMarkers();
+		this.filterMarkers();
 
 	}
 
-	showFilteredMarkers = (marker) => {
+	filterMarkers = () => {
 
 		let { filteredMarkers } = this.state;
+		let { markers, map } = this.props;
 
-		filteredMarkers.map((filteredMarker) => {
-			if (filteredMarker.title !== marker.name) {
-				marker.setVisible(false)
-			}  
-		})			
+		for (let i = 0; i < markers.length; i++) {
+			const marker = markers[i];
 
+			markers.map((marker) => {
+				marker.setMap(null)
+			})
+
+			filteredMarkers.map((filteredMarker) => {
+				if (marker.name === filteredMarkers.title) {
+					filteredMarker.setMap(map)
+				}  
+				
+			})
+
+		}
+				
 	}
 
 	render() {
@@ -84,13 +98,15 @@ class Sidebar extends Component {
 						/>
 					</form>
 					<ul className="locations-list">
+
 						{filteredParks.map((park) => (
-							<li 
-								key={park.id} 
-								className="list-item"
-								onClick={this.handleClick}
-							>{park.name}</li>
-						))}
+								<li 
+									key={park.id} 
+									className="list-item"
+									onClick={this.handleClick}
+								>{park.name}</li>
+							))}
+
 						{(filteredParks.length === 0) &&
 						<div>Sorry, we didn't find any park.</div>
 						}
