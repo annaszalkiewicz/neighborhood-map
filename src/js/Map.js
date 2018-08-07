@@ -26,9 +26,8 @@ class Map extends Component {
   componentDidMount = () => {
     window.initMap = this.initMap;
     // Asynchronously load the Google Maps script, passing in the callback reference
-    this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyDOCU_cQ_QOo17Gp9x5r2heeFNPR9KOZC4&callback=initMap');
+    this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyAf26YXhGHSk1MxVmC2BfMTG5EJp5gHUrA&callback=initMap');
     this.fetchImages();
-
   }
 
   loadJS = (src) => {
@@ -153,17 +152,18 @@ class Map extends Component {
           position: window.google.maps.ControlPosition.RIGHT_CENTER
         },
       });
-    this.setState({ map });
-    this.addMarker();
+    this.setState({ map: map });
 
     window.google.maps.event.addListenerOnce(map, 'idle', () => {
       document.getElementsByTagName('iframe')[0].title = 'Google  Maps';
     });
 
+    this.addMarker();
+
   }
 
   addMarker = () => {
-    let { markers, map, parks, currentInfoWindow, currentPark } = this.state;
+    let { markers, map, parks, currentInfoWindow } = this.state;
 
     for (let i = 0; i < parks.length; i++) {
       // Get the position from the location array.
@@ -227,7 +227,6 @@ class Map extends Component {
         }
         infoWindow.open(map, marker);
         currentInfoWindow = infoWindow;
-        this.setState({ currentPark: currentPark });
       });
 
     }
@@ -251,6 +250,8 @@ class Map extends Component {
 
   render() {
 
+    let { markers, map, parks } = this.state;
+
     return (
       <main>
         <div ref="map" id="map" className="map" role="application"></div>
@@ -263,6 +264,8 @@ class Map extends Component {
         <Sidebar
           parks={parks}
           toggleSidebar={this.toggleSidebar}
+          markers={markers}
+          map={map}
         />
         <div className="gallery"></div>
       </main>
