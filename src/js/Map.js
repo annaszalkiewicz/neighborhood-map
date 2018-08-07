@@ -16,6 +16,7 @@ class Map extends Component {
       currentInfoWindow: null,
       images: [],
       currentPark: {},
+      filteredMarkers: []
     };
     this.fetchImages = this.fetchImages.bind(this);
     this.addImages = this.addImages.bind(this);

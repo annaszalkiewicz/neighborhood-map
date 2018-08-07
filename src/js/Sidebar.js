@@ -11,15 +11,15 @@ class Sidebar extends Component {
 
 	componentDidMount = () => {
 		let { markers, parks } = this.props;
-		// let { filteredMarkers, filteredParks} = this.state;
+		let { filteredMarkers } = this.state;
 
 		this.setState({filteredMarkers: markers, filteredParks: parks});
+
 	}
 	updateQuery = (query) => {
 
 		this.setState({ query: query });
 		this.filterParks(query);
-		
   }
 
   clearQuery = () => {
@@ -32,7 +32,6 @@ class Sidebar extends Component {
 
 	filterParks = (query) => {
 		let  { markers, parks } = this.props;
-		// let { query } = this.state;
 
 		let filteredParks, filteredMarkers;
 
@@ -48,28 +47,26 @@ class Sidebar extends Component {
 		
 		else {
 			this.setState({filteredParks: parks, filteredMarkers: markers});
-    }
+		}
 
-		// parks.map((park) => {
-		// 	markers.map((marker) => {
-		// 		if (park.name === marker.title) {
-    //       marker.setVisible(true);
-          
-		// 		}
-		// 		// else {
-		// 		// 	marker.setVisible(false);
-		// 		// }
-		// 	})
-    // })
-    
-		
+		this.showFilteredMarkers();
+
+	}
+
+	showFilteredMarkers = (marker) => {
+
+		let { filteredMarkers } = this.state;
+
+		filteredMarkers.map((filteredMarker) => {
+			if (filteredMarker.title !== marker.name) {
+				marker.setVisible(false)
+			}  
+		})			
+
 	}
 
 	render() {
-		const { parks } = this.props;
 		const { query, filteredParks } = this.state;
-
-    // showingContacts.sort(sortBy('name'))
 
 		return (
 			<div className="sidebar-container" id="sidebar" onMouseUp={this.props.handleMouseUp}>
