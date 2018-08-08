@@ -112,6 +112,10 @@
 	list-style-type: none;
 	padding: 0.2em;
 }
+.list-item:hover {
+	cursor: pointer;
+	color: #e8a60c;
+}
 
 /* FOOTER */
 
