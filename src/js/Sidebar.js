@@ -1,86 +1,22 @@
 import React, { Component } from 'react';
-import escapeRegExp from 'escape-string-regexp'
 
 class Sidebar extends Component {
 
-	state = {
-		query: '',
-		filteredParks: [],
-		filteredMarkers: []
-	}
+	// handleClick = (marker) => {
 
-	componentDidMount = () => {
-		let { markers, parks } = this.props;
+	// 	console.log('I clicked list item!');
 
-		this.setState({filteredMarkers: markers, filteredParks: parks});
+	// 	const { markers, infoWindow, map } = this.props;
+	// 	let currentInfoWindow;
+		
+	// 	this.setState({infoWindow});
 
-	}
-	updateQuery = (query) => {
-
-		this.setState({ query: query });
-		this.filterParks(query);
-
-		if (!query) {
-			this.clearQuery();
-		}
-  }
-
-  clearQuery = () => {
-
-		let { markers, parks, map } = this.props;
-
-		this.setState({ query: '', filteredMarkers: markers, filteredParks: parks });
-
-			markers.map((marker) => {
-				marker.setMap(map)
-			})
-
-	}
-
-	filterParks = (query) => {
-		let  { markers, parks, map } = this.props;
-
-		let filteredParks, filteredMarkers;
-
-    if (query) {
-      const match = new RegExp(escapeRegExp(query), 'i')
-			filteredParks = parks.filter((park) => match.test(park.name));
-
-			filteredMarkers = markers.filter((marker) => match.test(marker.title));
-
-			this.setState({filteredParks, filteredMarkers});
-
-		} 
-
-		this.filterMarkers();
-
-	}
-
-	filterMarkers = () => {
-
-		let { filteredMarkers } = this.state;
-		let { markers, map } = this.props;
-
-		for (let i = 0; i < markers.length; i++) {
-			const marker = markers[i];
-
-			markers.map((marker) => {
-				marker.setMap(null)
-			})
-
-			filteredMarkers.map((filteredMarker) => {
-				if (marker.name === filteredMarkers.title) {
-					filteredMarker.setMap(map)
-				}  
-				
-			})
-
-		}
-				
-	}
+	// 	infoWindow.open(map, marker);
+	// 	currentInfoWindow = infoWindow;
+	// }
 
 	render() {
-		const { query, filteredParks } = this.state;
+		const { filterParks, filteredParks, markers, query } = this.props;
 
 		return (
 			<div className="sidebar-container" id="sidebar" onMouseUp={this.props.handleMouseUp}>
@@ -94,21 +30,23 @@ class Sidebar extends Component {
 							id="locations-filter"
 							placeholder="Search locations"
 							value={query}
-							onChange={(event) => this.updateQuery(event.target.value)}
+							onChange={(event) => filterParks(event.target.value)}
 						/>
 					</form>
 					<ul className="locations-list">
 
 						{filteredParks.map((park) => (
-								<li 
-									key={park.id} 
-									className="list-item"
-									onClick={this.handleClick}
-								>{park.name}</li>
-							))}
+							<li
+								key={park.id}
+								className="list-item"
+								// onMouseUp={(event) => this.handleClick(event.target)}
+							>
+								<a href="javascript:window.google.maps.event.trigger(markers,'click');">{park.name}</a>
+							</li>
+						))}
 
 						{(filteredParks.length === 0) &&
-						<div>Sorry, we didn't find any park.</div>
+							<div>Sorry, we didn't find any park.</div>
 						}
 					</ul>
 				</aside>

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import escapeRegExp from 'escape-string-regexp';
+import sortBy from 'sort-by';
 import Sidebar from './Sidebar';
 import parks from '../data/data.json';
 import icon from '../img/marker.png';
@@ -15,20 +17,36 @@ class Map extends Component {
       parks: parks,
       currentInfoWindow: null,
       images: [],
-      currentPark: {},
-      // filteredMarkers: []
+      currentPark: '',
+      query: '',
+      filteredMarkers: [],
+      filteredParks: [],
+      infoWindow: {}
     };
     this.fetchImages = this.fetchImages.bind(this);
     this.addImages = this.addImages.bind(this);
     this.toggleSidebar = this.toggleSidebar.bind(this);
     this.handleMouseUp = this.handleMouseUp.bind(this);
+    this.filterParks = this.filterParks.bind(this);
+    this.addMarker = this.addMarker.bind(this);
   }
 
   componentDidMount = () => {
+
+    //Create map on load
     window.initMap = this.initMap;
+
     // Asynchronously load the Google Maps script, passing in the callback reference
     this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyAf26YXhGHSk1MxVmC2BfMTG5EJp5gHUrA&callback=initMap');
+
+    // Fetch images from Flickr API
     this.fetchImages();
+
+    // Show all parks listed by default
+    let { markers, parks } = this.state;
+
+    this.setState({ filteredMarkers: markers, filteredParks: parks });
+
   }
 
   loadJS = (src) => {
@@ -158,7 +176,6 @@ class Map extends Component {
     window.google.maps.event.addListenerOnce(map, 'idle', () => {
       document.getElementsByTagName('iframe')[0].title = 'Google  Maps';
     });
-
     this.addMarker();
 
   }
@@ -223,11 +240,14 @@ class Map extends Component {
 
       marker.addListener('click', () => {
 
+        this.setState({infoWindow})
+
         if (currentInfoWindow !== null) {
           currentInfoWindow.close(map, this);
         }
         infoWindow.open(map, marker);
         currentInfoWindow = infoWindow;
+
       });
 
     }
@@ -237,36 +257,99 @@ class Map extends Component {
 
     const sidebar = document.getElementById('sidebar');
     (sidebar.classList.contains('show') ?
-    sidebar.classList.remove('show') :
-    sidebar.classList.add('show'))
+      sidebar.classList.remove('show') :
+      sidebar.classList.add('show'))
 
   }
 
   handleMouseUp(e) {
     this.toggleSidebar();
- 
+
     console.log("clicked");
     e.stopPropagation();
   }
 
+  filterParks = (query) => {
+    let { markers, parks, map } = this.state;
+
+    let filteredParks, filteredMarkers;
+
+    if (query) {
+
+      this.setState({ query: query });
+
+      const match = new RegExp(escapeRegExp(query), 'i')
+      filteredParks = parks.filter((park) => match.test(park.name));
+
+      filteredMarkers = markers.filter((marker) => match.test(marker.title));
+
+      filteredParks.sort(sortBy('name'));
+
+      this.setState({ filteredParks: filteredParks, filteredMarkers: filteredMarkers });
+
+      this.filterMarkers();
+
+    }
+
+    else if (!query) {
+      this.setState({ query: '', filteredParks: parks, filteredMarkers: markers });
+
+      markers.map((marker) => {
+        marker.setMap(map)
+      })
+    }
+
+  }
+
+  filterMarkers = () => {
+
+  	let { filteredMarkers } = this.state;
+  	let { markers, map } = this.state;
+
+  	for (let i = 0; i < markers.length; i++) {
+  		const marker = markers[i];
+
+  		markers.map((marker) => {
+  			marker.setMap(null)
+  		})
+
+  		filteredMarkers.map((filteredMarker) => {
+  			if (marker.name === filteredMarkers.title) {
+  				filteredMarker.setMap(map)
+  			}  
+
+  		})
+
+    }
+    // this.addMarker();
+
+  }
+
   render() {
 
-    let { markers, map, parks } = this.state;
+    let { markers, map, parks, filteredMarkers, filteredParks,query, infoWindow } = this.state;
 
     return (
       <main>
         <div ref="map" id="map" className="map" role="application"></div>
-        <button 
-				className="hamburger-button"
-				onMouseUp={this.handleMouseUp}
-			>
-				<i className="material-icons hamburger-menu">menu</i>
-			</button>
+        <button
+          className="hamburger-button"
+          onMouseUp={this.handleMouseUp}
+        >
+          <i className="material-icons hamburger-menu">menu</i>
+        </button>
         <Sidebar
           parks={parks}
           toggleSidebar={this.toggleSidebar}
           markers={markers}
           map={map}
+          filterMarkers={this.filterMarkers}
+          filterParks={this.filterParks}
+          filteredMarkers={filteredMarkers}
+          filteredParks={filteredParks}
+          updateQuery={this.updateQuery}
+          query={query}
+          infoWindow={infoWindow}
         />
         <div className="gallery"></div>
       </main>
