@@ -33,11 +33,11 @@ class Map extends Component {
 
   componentDidMount = () => {
 
-    //Create map on load
-    window.initMap = this.initMap;
-
     // Asynchronously load the Google Maps script, passing in the callback reference
     this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyAf26YXhGHSk1MxVmC2BfMTG5EJp5gHUrA&callback=initMap');
+
+    //Create map on load
+    window.initMap = this.initMap;
 
     // Fetch images from Flickr API
     this.fetchImages();
@@ -197,6 +197,7 @@ class Map extends Component {
         id: parks.id,
         icon: icon
       });
+
       // Push the marker to our array of markers.
       markers.push(marker);
 
@@ -240,7 +241,7 @@ class Map extends Component {
 
       marker.addListener('click', () => {
 
-        this.setState({infoWindow})
+        this.setState({ infoWindow })
 
         if (currentInfoWindow !== null) {
           currentInfoWindow.close(map, this);
@@ -268,93 +269,84 @@ class Map extends Component {
     console.log("clicked");
     e.stopPropagation();
   }
-
+ 
   filterParks = (query) => {
     let { markers, parks, map } = this.state;
 
     let filteredParks, filteredMarkers;
+
+    // Show all parks markers by default
+    markers.map((marker) => {
+      marker.setMap(map)
+    })
 
     if (query) {
 
       this.setState({ query: query });
 
       const match = new RegExp(escapeRegExp(query), 'i')
+
+      // Is search query match park name, add park to filteredParks array
       filteredParks = parks.filter((park) => match.test(park.name));
 
-      filteredMarkers = markers.filter((marker) => match.test(marker.title));
+      // Add markers to filteredMarkers array that don't match their park name with marker title
+      filteredMarkers = markers.filter((marker) => filteredParks.every((park) => park.name !== marker.title));
 
+      // Hide markers that are included in filteredMarkers array
+      filteredMarkers.map((filteredMarker) => {
+        filteredMarker.setMap(null)
+      })
+
+      // Sort search result by name
       filteredParks.sort(sortBy('name'));
 
       this.setState({ filteredParks: filteredParks, filteredMarkers: filteredMarkers });
 
-      this.filterMarkers();
-
     }
 
-    else if (!query) {
-      this.setState({ query: '', filteredParks: parks, filteredMarkers: markers });
+    // If there is no query, show all markers
+  
+    else {
+    this.setState({ query: '', filteredMarkers: markers, filteredParks: parks });
 
-      markers.map((marker) => {
-        marker.setMap(map)
-      })
+    markers.map((marker) => {
+      marker.setMap(map)
+    })
     }
 
-  }
+}
 
-  filterMarkers = () => {
+render() {
 
-  	let { filteredMarkers } = this.state;
-  	let { markers, map } = this.state;
+  let { markers, map, parks, filteredMarkers, filteredParks, query, infoWindow } = this.state;
 
-  	for (let i = 0; i < markers.length; i++) {
-  		const marker = markers[i];
-
-  		markers.map((marker) => {
-  			marker.setMap(null)
-  		})
-
-  		filteredMarkers.map((filteredMarker) => {
-  			if (marker.name === filteredMarkers.title) {
-  				filteredMarker.setMap(map)
-  			}  
-
-  		})
-
-    }
-    // this.addMarker();
-
-  }
-
-  render() {
-
-    let { markers, map, parks, filteredMarkers, filteredParks,query, infoWindow } = this.state;
-
-    return (
-      <main>
-        <div ref="map" id="map" className="map" role="application"></div>
-        <button
-          className="hamburger-button"
-          onMouseUp={this.handleMouseUp}
-        >
-          <i className="material-icons hamburger-menu">menu</i>
-        </button>
-        <Sidebar
-          parks={parks}
-          toggleSidebar={this.toggleSidebar}
-          markers={markers}
-          map={map}
-          filterMarkers={this.filterMarkers}
-          filterParks={this.filterParks}
-          filteredMarkers={filteredMarkers}
-          filteredParks={filteredParks}
-          updateQuery={this.updateQuery}
-          query={query}
-          infoWindow={infoWindow}
-        />
-        <div className="gallery"></div>
-      </main>
-    );
-  }
+  return (
+    <main>
+      <div ref="map" id="map" className="map" role="application"></div>
+      <button
+        className="hamburger-button"
+        onMouseUp={this.handleMouseUp}
+      >
+        <i className="material-icons hamburger-menu">menu</i>
+      </button>
+      <Sidebar
+        parks={parks}
+        toggleSidebar={this.toggleSidebar}
+        markers={markers}
+        map={map}
+        filterMarkers={this.filterMarkers}
+        filterParks={this.filterParks}
+        filteredMarkers={filteredMarkers}
+        filteredParks={filteredParks}
+        updateQuery={this.updateQuery}
+        query={query}
+        infoWindow={infoWindow}
+        handleClick={this.handleClick}
+      />
+      <div className="gallery"></div>
+    </main>
+  );
+}
 }
 
 export default Map;
