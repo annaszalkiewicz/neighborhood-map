@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by';
+import Modal from 'react-modal';
 import Sidebar from './Sidebar';
 import parks from '../data/data.json';
 import icon from '../img/marker.png';
+
+let marker;
 
 class Map extends Component {
 
@@ -29,6 +32,8 @@ class Map extends Component {
     this.handleMouseUp = this.handleMouseUp.bind(this);
     this.filterParks = this.filterParks.bind(this);
     this.addMarker = this.addMarker.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+
   }
 
   componentDidMount = () => {
@@ -234,7 +239,7 @@ class Map extends Component {
         </table>      
       </div>
       `;
-
+  
       const infoWindow = new window.google.maps.InfoWindow({
         content: content
       });
@@ -249,10 +254,25 @@ class Map extends Component {
         infoWindow.open(map, marker);
         currentInfoWindow = infoWindow;
 
-      });
+      }); 
 
     }
   }
+
+  handleClick = (e) => {
+
+    const { markers } = this.state;
+    e.preventDefault();
+
+    // When click on list item on sidebar, map over all markers to find the corresponding one and force to click it that results in opening info window 
+
+    markers.map((marker) => {
+      if (marker.title === e.target.innerHTML) {
+        window.google.maps.event.trigger(marker, 'click');
+      }
+    })
+
+	}
 
   toggleSidebar = () => {
 
@@ -266,7 +286,6 @@ class Map extends Component {
   handleMouseUp(e) {
     this.toggleSidebar();
 
-    console.log("clicked");
     e.stopPropagation();
   }
  

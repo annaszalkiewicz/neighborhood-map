@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 
 class Sidebar extends Component {
 
+	constructor(props) {
 
+		super(props);
+
+	}
 
 	render() {
-		const { filterParks, filteredParks, query } = this.props;
+		const { filterParks, handleClick, filteredParks, query } = this.props;
 
 		return (
 			<div className="sidebar-container" id="sidebar" onMouseUp={this.props.handleMouseUp}>
@@ -28,6 +32,7 @@ class Sidebar extends Component {
 							<li
 								key={park.id}
 								className="list-item"
+								onClick={(e) => handleClick(e)}
 							>{park.name}</li>
 						))}
 
