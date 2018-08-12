@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by';
-import Modal from 'react-modal';
 import Sidebar from './Sidebar';
 import parks from '../data/data.json';
 import icon from '../img/marker.png';
@@ -20,14 +19,13 @@ class Map extends Component {
       parks: parks,
       currentInfoWindow: null,
       images: [],
-      currentPark: '',
+      currentPark: {},
       query: '',
       filteredMarkers: [],
       filteredParks: [],
       infoWindow: {}
     };
     this.fetchImages = this.fetchImages.bind(this);
-    this.addImages = this.addImages.bind(this);
     this.toggleSidebar = this.toggleSidebar.bind(this);
     this.handleMouseUp = this.handleMouseUp.bind(this);
     this.filterParks = this.filterParks.bind(this);
@@ -43,9 +41,6 @@ class Map extends Component {
 
     //Create map on load
     window.initMap = this.initMap;
-
-    // Fetch images from Flickr API
-    this.fetchImages();
 
     // Show all parks listed by default
     let { markers, parks } = this.state;
@@ -65,27 +60,21 @@ class Map extends Component {
   fetchImages = () => {
 
     const key = '060c74d545a11b19611116873f118dba';
-    let { currentPark } = this.state;
+    let tags = this.state.currentPark.tags;
 
-    fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&tags=${currentPark.name}&per_page=5&page=1&format=json&nojsoncallback=1`)
+    fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&tags=${tags}&tag_mode=all&per_page=5&page=1&format=json&nojsoncallback=1`)
       .then(response => response.json())
-      .then((j) => this.addImages())
+      .then((j) => {
+
+        let pics = j.photos.photo.map((pic) => {
+
+          let url = 'https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '.jpg';
+          return url;
+        })
+    
+        this.setState({ images: pics });
+      })
       .catch(e => this.requestError(e, 'image'));
-
-  }
-
-  addImages = (j) => {
-
-    let images = j.photos.photo.map((pic) => {
-
-      let path = 'https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '.jpg';
-      return (
-        <img alt="National Parks of Poland" src={path}></img>
-      )
-    })
-    this.setState({ images: images });
-
-    console.log('Success!');
 
   }
 
@@ -186,7 +175,7 @@ class Map extends Component {
   }
 
   addMarker = () => {
-    let { markers, map, parks, currentInfoWindow } = this.state;
+    let { markers, map, parks, currentInfoWindow, images } = this.state;
 
     for (let i = 0; i < parks.length; i++) {
       // Get the position from the location array.
@@ -205,6 +194,8 @@ class Map extends Component {
 
       // Push the marker to our array of markers.
       markers.push(marker);
+
+      this.fetchImages();
 
       let content = `
       <h2 class="info-heading">${parks[i].name}</h2>
@@ -236,17 +227,26 @@ class Map extends Component {
               <td class="info-details">${parks[i].year} year</td>
             </tr>
           </tbody>
-        </table>      
+        </table>
+        <div class="gallery">
+          <img src=${images[0]} className="gallery-image" alt=${parks[i].name}/>
+          <img src=${images[1]} className="gallery-image" alt=${parks[i].name}/>
+          <img src=${images[2]} className="gallery-image" alt=${parks[i].name}/>
+          <img src=${images[3]} className="gallery-image" alt=${parks[i].name}/>
+          <img src=${images[4]} className="gallery-image" alt=${parks[i].name}/>
+        </div>      
       </div>
       `;
-  
+
       const infoWindow = new window.google.maps.InfoWindow({
         content: content
       });
 
       marker.addListener('click', () => {
 
-        this.setState({ infoWindow })
+        this.setState({ infoWindow, currentPark: parks[i] })
+
+        this.fetchImages();
 
         if (currentInfoWindow !== null) {
           currentInfoWindow.close(map, this);
@@ -254,7 +254,7 @@ class Map extends Component {
         infoWindow.open(map, marker);
         currentInfoWindow = infoWindow;
 
-      }); 
+      });
 
     }
   }
@@ -272,7 +272,7 @@ class Map extends Component {
       }
     })
 
-	}
+  }
 
   toggleSidebar = () => {
 
@@ -288,7 +288,7 @@ class Map extends Component {
 
     e.stopPropagation();
   }
- 
+
   filterParks = (query) => {
     let { markers, parks, map } = this.state;
 
@@ -324,48 +324,48 @@ class Map extends Component {
     }
 
     // If there is no query, show all markers
-  
-    else {
-    this.setState({ query: '', filteredMarkers: markers, filteredParks: parks });
 
-    markers.map((marker) => {
-      marker.setMap(map)
-    })
+    else {
+      this.setState({ query: '', filteredMarkers: markers, filteredParks: parks });
+
+      markers.map((marker) => {
+        marker.setMap(map)
+      })
     }
 
-}
+  }
 
-render() {
+  render() {
 
-  let { markers, map, parks, filteredMarkers, filteredParks, query, infoWindow } = this.state;
+    let { markers, map, parks, filteredMarkers, filteredParks, query, infoWindow } = this.state;
 
-  return (
-    <main>
-      <div ref="map" id="map" className="map" role="application"></div>
-      <button
-        className="hamburger-button"
-        onMouseUp={this.handleMouseUp}
-      >
-        <i className="material-icons hamburger-menu">menu</i>
-      </button>
-      <Sidebar
-        parks={parks}
-        toggleSidebar={this.toggleSidebar}
-        markers={markers}
-        map={map}
-        filterMarkers={this.filterMarkers}
-        filterParks={this.filterParks}
-        filteredMarkers={filteredMarkers}
-        filteredParks={filteredParks}
-        updateQuery={this.updateQuery}
-        query={query}
-        infoWindow={infoWindow}
-        handleClick={this.handleClick}
-      />
-      <div className="gallery"></div>
-    </main>
-  );
-}
+    return (
+      <main>
+        <div ref="map" id="map" className="map" role="application"></div>
+        <button
+          className="hamburger-button"
+          onMouseUp={this.handleMouseUp}
+        >
+          <i className="material-icons hamburger-menu">menu</i>
+        </button>
+        <Sidebar
+          parks={parks}
+          toggleSidebar={this.toggleSidebar}
+          markers={markers}
+          map={map}
+          filterMarkers={this.filterMarkers}
+          filterParks={this.filterParks}
+          filteredMarkers={filteredMarkers}
+          filteredParks={filteredParks}
+          updateQuery={this.updateQuery}
+          query={query}
+          infoWindow={infoWindow}
+          handleClick={this.handleClick}
+        />
+        <div className="gallery"></div>
+      </main>
+    );
+  }
 }
 
 export default Map;
