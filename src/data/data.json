@@ -11,7 +11,8 @@
     "area": 33.92,
     "year": 1933,
     "telephone": "+48 33 877 51 10",
-    "url": "http://bgpn.pl"
+    "url": "http://bgpn.pl",
+    "tags": "babia,gora,national,park"
   },
   {
     "id": "bialowieza",
@@ -25,7 +26,8 @@
     "area": 105.02,
     "year": 1932,
     "telephone": "+48 33 877 51 10",
-    "url": "https://www.bpn.com.pl/"
+    "url": "https://www.bpn.com.pl/",
+    "tags": "bialowieza,national,park"
   },
   {
     "id": "biebrza",
@@ -39,7 +41,9 @@
     "area": 592.23,
     "year": 1993,
     "telephone": "+48 85 738 06 20",
-    "url": "https://www.biebrza.org.pl/"
+    "url": "https://www.biebrza.org.pl/",
+    "tags": "biebrza,national,park"
+
   },
   {
     "id": "bieszczady",
@@ -53,7 +57,9 @@
     "area": 292.01,
     "year": 1973,
     "telephone": "+48 13 461 06 10",
-    "url": "https://www.bdpn.pl/"
+    "url": "https://www.bdpn.pl/",
+    "tags": "bieszczady,national,park"
+
   },
   {
     "id": "tuchola-forest",
@@ -67,7 +73,8 @@
     "area": 47.98,
     "year": 1996,
     "telephone": "+48 52 398 83 97",
-    "url": "https://http://www.pnbt.com.pl//"
+    "url": "https://http://www.pnbt.com.pl//",
+    "tags": "tuchola,forest,national,park"
   },
   {
     "id": "drawa",
@@ -81,7 +88,8 @@
     "area": 114.41,
     "year": 1990,
     "telephone": "+48 95 768 20 51",
-    "url": "https://dpn.pl/"
+    "url": "https://dpn.pl/",
+    "tags": "drawa,national,park"
   },
   {
     "id": "gorce",
@@ -95,7 +103,8 @@
     "area": 70.29,
     "year": 1981,
     "telephone": "+48 18 331 72 07",
-    "url": "http://www.gorczanskipark.pl/"
+    "url": "http://www.gorczanskipark.pl/",
+    "tags": "gorce,national,park"
   },
   {
     "id": "stolowe-mountains",
@@ -109,7 +118,8 @@
     "area": 63.40,
     "year": 1993,
     "telephone": "+48 74 866 14 36",
-    "url": "http://www.pngs.com.pl/"
+    "url": "http://www.pngs.com.pl/",
+    "tags": "stolowe,mountains,national,park"
   },
   {
     "id": "kampinos",
@@ -123,7 +133,9 @@
     "area": 385.44,
     "year": 1959,
     "telephone": "+48 22 722 60 01",
-    "url": "https://kampinoski-pn.gov.pl/"
+    "url": "https://kampinoski-pn.gov.pl/",
+    "tags": "kampinos,national,park"
+
   },
   {
     "id": "karkonosze",
@@ -137,7 +149,8 @@
     "area": 55.76,
     "year": 1959,
     "telephone": "+48 75 755 37 26",
-    "url": "https://kpnmab.pl/"
+    "url": "https://kpnmab.pl/",
+    "tags": "karkonosze,national,park"
   },
   {
     "id": "magura",
@@ -151,7 +164,8 @@
     "area": 194.39,
     "year": 1995,
     "telephone": "48 13 441 40 99",
-    "url": "http://magurskipn.pl/"
+    "url": "http://magurskipn.pl/",
+    "tags": "magura,national,park"
   },
   {
     "id": "narew",
@@ -165,7 +179,9 @@
     "area": 68.10,
     "year": 1996,
     "telephone": "+48 85 718 14 17",
-    "url": "https://www.npn.pl/"
+    "url": "https://www.npn.pl/",
+    "tags": "narew,national,park"
+
   },
   {
     "id": "ojcow",
@@ -179,7 +195,8 @@
     "area": 21.46,
     "year": 1956,
     "telephone": "+48 12 389 20 05",
-    "url": "http://www.ojcowskiparknarodowy.pl/"
+    "url": "http://www.ojcowskiparknarodowy.pl/",
+    "tags": "ojcow,national,park"
   },
   {
     "id": "pieniny",
@@ -193,7 +210,8 @@
     "area": 23.46,
     "year": 1932,
     "telephone": "+48 18 262 56 01",
-    "url": "http://www.pieninypn.pl"
+    "url": "http://www.pieninypn.pl",
+    "tags": "pieniny,national,park"
   },
   {
     "id": "polesie",
@@ -207,7 +225,8 @@
     "area": 97.62,
     "year": 1990,
     "telephone": "+48 82 571 30 71",
-    "url": "http://www.poleskipn.pl"
+    "url": "http://www.poleskipn.pl",
+    "tags": "polesie,national,park"
   },
   {
     "id": "roztocze",
@@ -221,7 +240,8 @@
     "area": 84.83,
     "year": 1974,
     "telephone": "+48 84 687 20 66",
-    "url": "http://roztoczanskipn.pl/"
+    "url": "http://roztoczanskipn.pl/",
+    "tags": "roztocze,national,park"
   },
   {
     "id": "slowinski",
@@ -235,7 +255,8 @@
     "area": 186.00,
     "year": 1967,
     "telephone": "+48 59 811 72 04",
-    "url": "https://slowinskipn.pl/"
+    "url": "https://slowinskipn.pl/",
+    "tags": "slowinski,national,park"
   },
   {
     "id": "swietokrzyski",
@@ -249,7 +270,8 @@
     "area": 76.26,
     "year": 1950,
     "telephone": "+48 41 311 51 06",
-    "url": "https://www.swietokrzyskipn.org.pl/"
+    "url": "https://www.swietokrzyskipn.org.pl/",
+    "tags": "swietokrzyski,national,park"
   },
   {
     "id": "tatra",
@@ -263,7 +285,8 @@
     "area": 211.64,
     "year": 1947,
     "telephone": "+48 18 202 32 00",
-    "url": "https://tpn.pl/"
+    "url": "https://tpn.pl/",
+    "tags": "tatra,national,park"
   },
   {
     "id": "ujscie-warty",
@@ -277,7 +300,8 @@
     "area": 80.38,
     "year": 2001,
     "telephone": "+48 95 751 43 38",
-    "url": "https://www.pnujsciewarty.gov.pl/"
+    "url": "https://www.pnujsciewarty.gov.pl/",
+    "tags": "ujscie,warty,national,park"
   },
   {
     "id": "wielkopolski",
@@ -291,7 +315,8 @@
     "area": 75.84,
     "year": 1957,
     "telephone": "+48 61 898 23 00",
-    "url": "http://www.wielkopolskipn.pl/"
+    "url": "http://www.wielkopolskipn.pl/",
+    "tags": "wielkopolski,national,park"
   },
   {
     "id": "wigry",
@@ -305,7 +330,8 @@
     "area": 150.86,
     "year": 1989,
     "telephone": "+48 87 563 25 40",
-    "url": "http://www.wigry.org.pl/"
+    "url": "http://www.wigry.org.pl/",
+    "tags": "wigry,national,park"
   },
   {
     "id": "wolin",
@@ -319,6 +345,7 @@
     "area": 109.37,
     "year": 1960,
     "telephone": "+48 91 328 07 37",
-    "url": "http://www.wolinpn.pl/"
+    "url": "http://www.wolinpn.pl/",
+    "tags": "wolin,national,park"
   }
 ]
