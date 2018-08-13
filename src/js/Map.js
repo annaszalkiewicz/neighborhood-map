@@ -16,13 +16,11 @@ class Map extends Component {
       map: '',
       markers: [],
       parks: parks,
-      currentInfoWindow: null,
       images: [],
       currentPark: {},
       query: '',
       filteredMarkers: [],
       filteredParks: [],
-      infoWindow: {},
       modalIsOpen: false
     };
     this.fetchImages = this.fetchImages.bind(this);
@@ -59,10 +57,12 @@ class Map extends Component {
   }
 
   openModal = () => {
-    this.fetchImages();
 
-    Modal.setAppElement('#root');
-    this.setState({ modalIsOpen: true });
+      this.fetchImages();
+
+      Modal.setAppElement('#root');
+      this.setState({ modalIsOpen: true });
+    
   }
 
   closeModal = () => {
@@ -74,7 +74,7 @@ class Map extends Component {
     const key = '060c74d545a11b19611116873f118dba';
     let tags = this.state.currentPark.name;
 
-    fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&text=${tags}&tag_mode=all&content_type=1&sort=interestingness-desc&per_page=5&page=1&format=json&nojsoncallback=1`)
+    fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&text=${tags}&tag_mode=all&content_type=1&sort=interestingness-desc&orientation=landscape&per_page=5&page=1&format=json&nojsoncallback=1`)
       .then(response => response.json())
       .then((j) => {
 
@@ -89,7 +89,7 @@ class Map extends Component {
           )
         })
 
-        this.setState({ images: pics, galleryIsOpen: true });
+        this.setState({ images: pics });
 
       })
       .catch(e => this.requestError(e, 'image'));
@@ -193,7 +193,7 @@ class Map extends Component {
   }
 
   addMarker = () => {
-    let { markers, map, parks, currentInfoWindow } = this.state;
+    let { markers, map, parks } = this.state;
 
     for (let i = 0; i < parks.length; i++) {
       // Get the position from the location array.
@@ -215,43 +215,6 @@ class Map extends Component {
 
       this.showListings();
 
-      let content = `
-      <h2 class="info-heading">${parks[i].name}</h2>
-      <div class="info-container">
-        <table>
-          <tbody>
-            <tr>
-              <td class="info-heading">Origin:</td>
-              <td class="info-details">${parks[i].origin}</td>
-            </tr>
-            <tr>
-              <td class="info-heading">Seat:</td>
-              <td class="info-details">${parks[i].seat}</td>
-            </tr>
-            <tr>
-              <td class="info-heading">Telephone:</td>
-              <td class="info-details">${parks[i].telephone}</td>
-            </tr>
-            <tr>
-              <td class="info-heading">Website:</td>
-              <td class="info-details"><a href=${parks[i].url}>${parks[i].url}</a></td>
-            </tr>
-            <tr>
-              <td class="info-heading">Area:</td>
-              <td class="info-details">${parks[i].area} km&sup2;</td>
-            </tr>
-            <tr>
-              <td class="info-heading">Established:</td>
-              <td class="info-details">${parks[i].year} year</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      `;
-
-      const infoWindow = new window.google.maps.InfoWindow({
-        content: content,
-      });
 
       marker.addListener('click', () => {
 
@@ -259,17 +222,11 @@ class Map extends Component {
         // Add animation to marker on click
         setTimeout(() => {
           marker.setAnimation(null);
-        }, 1000);
+        }, 2000);
 
-        this.setState({ infoWindow, currentPark: parks[i] })
+        this.setState({currentPark: parks[i]});
 
-        this.openModal();
-
-        if (currentInfoWindow !== null) {
-          currentInfoWindow.close(map, this);
-        }
-        infoWindow.open(map, marker);
-        currentInfoWindow = infoWindow;
+        setTimeout(() => { this.openModal(); }, 100);
 
       });
 
@@ -299,7 +256,10 @@ class Map extends Component {
 
     markers.map((marker) => {
       if (marker.title === e.target.innerHTML) {
+        this.closeModal();
+
         return window.google.maps.event.trigger(marker, 'click');
+
       }
     })
 
@@ -368,7 +328,7 @@ class Map extends Component {
 
   render() {
 
-    let { markers, map, parks, filteredMarkers, filteredParks, query, infoWindow, images, modalIsOpen } = this.state;
+    let { markers, map, parks, filteredMarkers, filteredParks, query, infoWindow, images, modalIsOpen, currentPark } = this.state;
 
     return (
       <main>
@@ -397,7 +357,7 @@ class Map extends Component {
         {images.length !== 0 && (
           <Modal
             isOpen={modalIsOpen}
-            // onRequestClose={this.closeModal}
+            onRequestClose={this.closeModal}
             contentLabel="onRequestClose Example"
             className="Modal"
             overlayClassName="Overlay"
@@ -405,6 +365,38 @@ class Map extends Component {
             <button className="close-button" onClick={this.closeModal}>
               <i className="material-icons">close</i>
             </button>
+
+            <h2 className="info-heading">{currentPark.name}</h2>
+      <div className="info-container">
+        <table>
+          <tbody>
+            <tr>
+              <td className="info-heading">Origin:</td>
+              <td className="info-details">{currentPark.origin}</td>
+            </tr>
+            <tr>
+              <td className="info-heading">Seat:</td>
+              <td className="info-details">{currentPark.seat}</td>
+            </tr>
+            <tr>
+              <td className="info-heading">Telephone:</td>
+              <td className="info-details">{currentPark.telephone}</td>
+            </tr>
+            <tr>
+              <td className="info-heading">Website:</td>
+              <td className="info-details"><a href={currentPark.url}>{currentPark.url}</a></td>
+            </tr>
+            <tr>
+              <td className="info-heading">Area:</td>
+              <td className="info-details">{currentPark.area} km&sup2;</td>
+            </tr>
+            <tr>
+              <td className="info-heading">Established:</td>
+              <td className="info-details">{currentPark.year} year</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
             <div className="gallery">{images}</div>
             <div className="powered-by">Powered by
