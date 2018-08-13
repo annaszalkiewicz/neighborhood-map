@@ -63,7 +63,7 @@
   },
   {
     "id": "tuchola-forest",
-    "name": "Tuchola Forest National Park",
+    "name": "Tuchola National Park",
     "latlng": {
       "lat": 53.81517,
       "lng": 17.5626377
@@ -74,7 +74,7 @@
     "year": 1996,
     "telephone": "+48 52 398 83 97",
     "url": "https://http://www.pnbt.com.pl//",
-    "tags": "tuchola,forest,national,park"
+    "tags": "tuchola,national,park"
   },
   {
     "id": "drawa",

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by';
+import Modal from 'react-modal';
 import Sidebar from './Sidebar';
 import parks from '../data/data.json';
 import icon from '../img/marker.png';
-
-let marker;
 
 class Map extends Component {
 
@@ -23,7 +22,8 @@ class Map extends Component {
       query: '',
       filteredMarkers: [],
       filteredParks: [],
-      infoWindow: {}
+      infoWindow: {},
+      modalIsOpen: false
     };
     this.fetchImages = this.fetchImages.bind(this);
     this.toggleSidebar = this.toggleSidebar.bind(this);
@@ -31,7 +31,8 @@ class Map extends Component {
     this.filterParks = this.filterParks.bind(this);
     this.addMarker = this.addMarker.bind(this);
     this.handleClick = this.handleClick.bind(this);
-
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   componentDidMount = () => {
@@ -57,22 +58,40 @@ class Map extends Component {
     ref.parentNode.insertBefore(script, ref);
   }
 
+  openModal = () => {
+    this.fetchImages();
+
+    Modal.setAppElement('#root');
+    this.setState({ modalIsOpen: true });
+  }
+
+  closeModal = () => {
+    this.setState({ modalIsOpen: false });
+  }
+
   fetchImages = () => {
 
     const key = '060c74d545a11b19611116873f118dba';
-    let tags = this.state.currentPark.tags;
+    let tags = this.state.currentPark.name;
+    const { currentPark } = this.state;
 
-    fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&tags=${tags}&tag_mode=all&per_page=5&page=1&format=json&nojsoncallback=1`)
+    fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&text=${tags}&tag_mode=all&content_type=1&sort=interestingness-desc&per_page=5&page=1&format=json&nojsoncallback=1`)
       .then(response => response.json())
       .then((j) => {
 
         let pics = j.photos.photo.map((pic) => {
 
           let url = 'https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '.jpg';
-          return url;
+          return (
+            <a href={url} target="_blank" key={pic.id}>
+              <img key={pic.id} src={url} className="gallery-image" alt={tags} />
+            </a>
+
+          )
         })
-    
-        this.setState({ images: pics });
+
+        this.setState({ images: pics, galleryIsOpen: true });
+
       })
       .catch(e => this.requestError(e, 'image'));
 
@@ -175,7 +194,7 @@ class Map extends Component {
   }
 
   addMarker = () => {
-    let { markers, map, parks, currentInfoWindow, images } = this.state;
+    let { markers, map, parks, currentInfoWindow } = this.state;
 
     for (let i = 0; i < parks.length; i++) {
       // Get the position from the location array.
@@ -194,8 +213,6 @@ class Map extends Component {
 
       // Push the marker to our array of markers.
       markers.push(marker);
-
-      this.fetchImages();
 
       let content = `
       <h2 class="info-heading">${parks[i].name}</h2>
@@ -228,13 +245,6 @@ class Map extends Component {
             </tr>
           </tbody>
         </table>
-        <div class="gallery">
-          <img src=${images[0]} className="gallery-image" alt=${parks[i].name}/>
-          <img src=${images[1]} className="gallery-image" alt=${parks[i].name}/>
-          <img src=${images[2]} className="gallery-image" alt=${parks[i].name}/>
-          <img src=${images[3]} className="gallery-image" alt=${parks[i].name}/>
-          <img src=${images[4]} className="gallery-image" alt=${parks[i].name}/>
-        </div>      
       </div>
       `;
 
@@ -246,7 +256,9 @@ class Map extends Component {
 
         this.setState({ infoWindow, currentPark: parks[i] })
 
-        this.fetchImages();
+        this.closeModal();
+
+        this.openModal();
 
         if (currentInfoWindow !== null) {
           currentInfoWindow.close(map, this);
@@ -268,7 +280,7 @@ class Map extends Component {
 
     markers.map((marker) => {
       if (marker.title === e.target.innerHTML) {
-        window.google.maps.event.trigger(marker, 'click');
+        return window.google.maps.event.trigger(marker, 'click');
       }
     })
 
@@ -337,7 +349,7 @@ class Map extends Component {
 
   render() {
 
-    let { markers, map, parks, filteredMarkers, filteredParks, query, infoWindow } = this.state;
+    let { markers, map, parks, filteredMarkers, filteredParks, query, infoWindow, images, modalIsOpen } = this.state;
 
     return (
       <main>
@@ -362,7 +374,33 @@ class Map extends Component {
           infoWindow={infoWindow}
           handleClick={this.handleClick}
         />
-        <div className="gallery"></div>
+
+        {images.length !== 0 && (
+          <Modal
+            isOpen={modalIsOpen}
+            // onRequestClose={this.closeModal}
+            contentLabel="onRequestClose Example"
+            className="Modal"
+            overlayClassName="Overlay"
+          >
+            <button className="close-button" onClick={this.closeModal}>
+              <i className="material-icons">close</i>
+            </button>
+
+            <div className="gallery">{images}</div>
+            <div className="powered-by">Powered by
+            <a href="https://flickr.com">Flickr</a>
+            </div>
+
+          </Modal>
+        )}
+
+        {images.length === 0 && (
+          <div className="no-found">
+            Sorry, we didn't find any image.
+					</div>
+        )}
+
       </main>
     );
   }
