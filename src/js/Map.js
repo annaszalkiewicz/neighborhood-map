@@ -214,6 +214,8 @@ class Map extends Component {
       // Push the marker to our array of markers.
       markers.push(marker);
 
+      this.showListings();
+
       let content = `
       <h2 class="info-heading">${parks[i].name}</h2>
       <div class="info-container">
@@ -249,7 +251,7 @@ class Map extends Component {
       `;
 
       const infoWindow = new window.google.maps.InfoWindow({
-        content: content
+        content: content,
       });
 
       marker.addListener('click', () => {
@@ -269,6 +271,20 @@ class Map extends Component {
       });
 
     }
+  }
+
+  // This function will loop through the markers array and display them all.
+  showListings = () => {
+
+    const { markers, map } = this.state;
+    
+    const bounds = new window.google.maps.LatLngBounds();
+    // Extend the boundaries of the map for each marker and display the marker
+    for (let i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+      bounds.extend(markers[i].position);
+    }
+    map.fitBounds(bounds);
   }
 
   handleClick = (e) => {
