@@ -73,7 +73,6 @@ class Map extends Component {
 
     const key = '060c74d545a11b19611116873f118dba';
     let tags = this.state.currentPark.name;
-    const { currentPark } = this.state;
 
     fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&text=${tags}&tag_mode=all&content_type=1&sort=interestingness-desc&per_page=5&page=1&format=json&nojsoncallback=1`)
       .then(response => response.json())
@@ -256,9 +255,13 @@ class Map extends Component {
 
       marker.addListener('click', () => {
 
-        this.setState({ infoWindow, currentPark: parks[i] })
+        marker.setAnimation(window.google.maps.Animation.BOUNCE);
+        // Add animation to marker on click
+        setTimeout(() => {
+          marker.setAnimation(null);
+        }, 1000);
 
-        this.closeModal();
+        this.setState({ infoWindow, currentPark: parks[i] })
 
         this.openModal();
 
@@ -277,7 +280,7 @@ class Map extends Component {
   showListings = () => {
 
     const { markers, map } = this.state;
-    
+
     const bounds = new window.google.maps.LatLngBounds();
     // Extend the boundaries of the map for each marker and display the marker
     for (let i = 0; i < markers.length; i++) {
