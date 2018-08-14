@@ -24,8 +24,6 @@ class Map extends Component {
       modalIsOpen: false
     };
     this.fetchImages = this.fetchImages.bind(this);
-    this.toggleSidebar = this.toggleSidebar.bind(this);
-    this.handleMouseUp = this.handleMouseUp.bind(this);
     this.filterParks = this.filterParks.bind(this);
     this.addMarker = this.addMarker.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -266,21 +264,6 @@ class Map extends Component {
 
   }
 
-  toggleSidebar = () => {
-
-    const sidebar = document.getElementById('sidebar');
-    (sidebar.classList.contains('show') ?
-      sidebar.classList.remove('show') :
-      sidebar.classList.add('show'))
-
-  }
-
-  handleMouseUp(e) {
-    this.toggleSidebar();
-
-    e.stopPropagation();
-  }
-
   filterParks = (query) => {
     let { markers, parks, map } = this.state;
 
@@ -334,12 +317,12 @@ class Map extends Component {
     return (
       <main>
         <div ref="map" id="map" className="map" role="application"></div>
-        <button
+        {/* <button
           className="hamburger-button"
           onMouseUp={this.handleMouseUp}
         >
           <i className="material-icons hamburger-menu">menu</i>
-        </button>
+        </button> */}
         <Sidebar
           parks={parks}
           toggleSidebar={this.toggleSidebar}
