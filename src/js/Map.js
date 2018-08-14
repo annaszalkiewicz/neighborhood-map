@@ -367,7 +367,7 @@ class Map extends Component {
               <i className="material-icons">close</i>
             </button>
 
-            <h2 className="info-heading">{currentPark.name}</h2>
+            <h2 className="modal-heading">{currentPark.name}</h2>
             <div className="info-container">
               <table>
                 <tbody>

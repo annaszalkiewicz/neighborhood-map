@@ -1,3 +1,7 @@
+* {
+	padding: 0;
+	margin: 0;
+}
 html, body, #root, main, .app, .map {
 	width: 100%;
 	height: 100%;
@@ -48,7 +52,7 @@ html, body, #root, main, .app, .map {
 /* SIDEBAR */
 
 .sidebar-container {
-	width: 265px;
+	width: 240px;
 	box-shadow: 0 0 20px #111;
 	background-color: #fff;
 	position: absolute;
@@ -81,7 +85,7 @@ html, body, #root, main, .app, .map {
 }
 .input {
 	display: block;
-	width: 90%;
+	width: 87%;
 	padding: 1em;
 	border-radius: 5px;
 	border: solid 1px #aaa;
@@ -93,6 +97,9 @@ html, body, #root, main, .app, .map {
 	font-style: italic;
 	color: #111;
 }
+.locations-list {
+	margin-top: 1em;
+}
 .list-item {
 	list-style-type: none;
 	padding: 0.2em;
@@ -100,6 +107,7 @@ html, body, #root, main, .app, .map {
 .list-item:hover, .list-item:focus {
 	color: #e8a60c;
 	cursor: pointer;
+	outline: none;
 }
 .list-item:hover {
 	cursor: pointer;
@@ -142,6 +150,7 @@ html, body, #root, main, .app, .map {
 	display: flex;
 	flex-direction: row;
 	width: 300px;
+	margin-top: 1em;
 }
 .info-left {
 	width: 30%;
@@ -150,9 +159,13 @@ html, body, #root, main, .app, .map {
 	width: 70%;
 }
 .info-heading {
+	margin-top: -15px;
 	font-weight: bold;
 }
-
+.modal-heading {
+	border-bottom: solid 1px #aaa;
+	padding-bottom: 1em;
+}
 .park-link {
 	text-decoration: none;
 	color: #07401A;
@@ -162,18 +175,19 @@ html, body, #root, main, .app, .map {
 	outline: none;
 }
 .image-container {
-	width: 280px;
+	width: 265px;
 	height: 200px;
 	position: relative;
 	overflow: hidden;
+	background-color: #000;
+	margin: 1em auto;
 }
 .gallery-image {
-	height: auto;
-	width: 280px;
+	height: 200px;
+	width: 265px;
 	z-index: 1000100;
 	position: absolute;
-	top: 0;
-	left: 0;
+	object-fit: cover;
 }
 .gallery-image:hover {
 	cursor: pointer;
@@ -183,6 +197,10 @@ html, body, #root, main, .app, .map {
 .gallery-image:focus {
 	border: solid 2px #e8a60c;
 	outline: none;
+}
+.powered-by {
+	border-top: solid 1px #aaa;
+	padding: 1em 0 0 0;
 }
 
 .Modal {
@@ -218,9 +236,7 @@ html, body, #root, main, .app, .map {
 	border: none;
 	border-radius: 50%;
 	color: #fff;
-	position: absolute;
-	right: 0;
-	top: 0;
+	margin: -10px auto auto 265px;
 	width: 24px;
 	height: 24px;
 	box-shadow: 0 5px 10px #000;
