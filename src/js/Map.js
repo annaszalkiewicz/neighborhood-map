@@ -82,10 +82,11 @@ class Map extends Component {
 
           let url = 'https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '.jpg';
           return (
-            <a href={url} target="_blank" key={pic.id}>
+            <div className="image-container" key={pic.id}>
+              <a href={url} target="_blank">
               <img key={pic.id} src={url} className="gallery-image" alt={tags} />
             </a>
-
+            </div>
           )
         })
 

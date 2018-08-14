@@ -157,11 +157,24 @@ html, body, #root, main, .app, .map {
 	color: #e8a60c;
 	outline: none;
 }
-
+.image-container {
+	width: 280px;
+	height: 200px;
+	position: relative;
+	overflow: hidden;
+}
 .gallery-image {
 	height: auto;
 	width: 280px;
-	z-index: 1000100
+	z-index: 1000100;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.gallery-image:hover {
+	cursor: pointer;
+	transform: scale(1.2);
+	transition: transform 3s ease;
 }
 .gallery-image:focus {
 	border: solid 2px #e8a60c;
@@ -172,7 +185,7 @@ html, body, #root, main, .app, .map {
 	margin: 1em auto;
 	background-color: #fff;
 	width: 280px;
-	height: auto;
+	height: 93%;
 	z-index: 1000000;
 	overflow-x: hidden;
 	overflow-y: auto;
