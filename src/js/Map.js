@@ -58,11 +58,11 @@ class Map extends Component {
 
   openModal = () => {
 
-      this.fetchImages();
+    this.fetchImages();
 
-      Modal.setAppElement('#root');
-      this.setState({ modalIsOpen: true });
-    
+    Modal.setAppElement('#root');
+    this.setState({ modalIsOpen: true });
+
   }
 
   closeModal = () => {
@@ -84,8 +84,8 @@ class Map extends Component {
           return (
             <div className="image-container" key={pic.id}>
               <a href={url} target="_blank">
-              <img key={pic.id} src={url} className="gallery-image" alt={tags} />
-            </a>
+                <img key={pic.id} src={url} className="gallery-image" alt={tags} />
+              </a>
             </div>
           )
         })
@@ -225,7 +225,7 @@ class Map extends Component {
           marker.setAnimation(null);
         }, 2000);
 
-        this.setState({currentPark: parks[i]});
+        this.setState({ currentPark: parks[i] });
 
         setTimeout(() => { this.openModal(); }, 600);
 
@@ -368,36 +368,36 @@ class Map extends Component {
             </button>
 
             <h2 className="info-heading">{currentPark.name}</h2>
-      <div className="info-container">
-        <table>
-          <tbody>
-            <tr>
-              <td className="info-heading">Origin:</td>
-              <td className="info-details">{currentPark.origin}</td>
-            </tr>
-            <tr>
-              <td className="info-heading">Seat:</td>
-              <td className="info-details">{currentPark.seat}</td>
-            </tr>
-            <tr>
-              <td className="info-heading">Telephone:</td>
-              <td className="info-details">{currentPark.telephone}</td>
-            </tr>
-            <tr>
-              <td className="info-heading">Website:</td>
-              <td className="info-details"><a href={currentPark.url} className="park-link" target="_blank">{currentPark.url}</a></td>
-            </tr>
-            <tr>
-              <td className="info-heading">Area:</td>
-              <td className="info-details">{currentPark.area} km&sup2;</td>
-            </tr>
-            <tr>
-              <td className="info-heading">Established:</td>
-              <td className="info-details">{currentPark.year} year</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+            <div className="info-container">
+              <table>
+                <tbody>
+                  <tr>
+                    <td className="info-heading">Origin:</td>
+                    <td className="info-details">{currentPark.origin}</td>
+                  </tr>
+                  <tr>
+                    <td className="info-heading">Seat:</td>
+                    <td className="info-details">{currentPark.seat}</td>
+                  </tr>
+                  <tr>
+                    <td className="info-heading">Telephone:</td>
+                    <td className="info-details">{currentPark.telephone}</td>
+                  </tr>
+                  <tr>
+                    <td className="info-heading">Website:</td>
+                    <td className="info-details"><a href={currentPark.url} className="park-link" target="_blank">{currentPark.url}</a></td>
+                  </tr>
+                  <tr>
+                    <td className="info-heading">Area:</td>
+                    <td className="info-details">{currentPark.area} km&sup2;</td>
+                  </tr>
+                  <tr>
+                    <td className="info-heading">Established:</td>
+                    <td className="info-details">{currentPark.year} year</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
             <div className="gallery">{images}</div>
             <div className="powered-by">Photo gallery powered by
@@ -408,9 +408,54 @@ class Map extends Component {
         )}
 
         {images.length === 0 && (
-          <div className="no-found">
-            Sorry, we didn't find any image.
-					</div>
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={this.closeModal}
+            contentLabel="onRequestClose Example"
+            className="Modal"
+            overlayClassName="Overlay"
+          >
+            <button className="close-button" onClick={this.closeModal}>
+              <i className="material-icons">close</i>
+            </button>
+
+            <h2 className="info-heading">{currentPark.name}</h2>
+            <div className="info-container">
+              <table>
+                <tbody>
+                  <tr>
+                    <td className="info-heading">Origin:</td>
+                    <td className="info-details">{currentPark.origin}</td>
+                  </tr>
+                  <tr>
+                    <td className="info-heading">Seat:</td>
+                    <td className="info-details">{currentPark.seat}</td>
+                  </tr>
+                  <tr>
+                    <td className="info-heading">Telephone:</td>
+                    <td className="info-details">{currentPark.telephone}</td>
+                  </tr>
+                  <tr>
+                    <td className="info-heading">Website:</td>
+                    <td className="info-details"><a href={currentPark.url} className="park-link" target="_blank">{currentPark.url}</a></td>
+                  </tr>
+                  <tr>
+                    <td className="info-heading">Area:</td>
+                    <td className="info-details">{currentPark.area} km&sup2;</td>
+                  </tr>
+                  <tr>
+                    <td className="info-heading">Established:</td>
+                    <td className="info-details">{currentPark.year} year</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="no-found">
+              Sorry, we didn't find any image.
+					  </div>
+
+          </Modal>
+
         )}
 
       </main>

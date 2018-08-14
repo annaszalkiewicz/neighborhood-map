@@ -48,7 +48,7 @@ html, body, #root, main, .app, .map {
 /* SIDEBAR */
 
 .sidebar-container {
-	width: 300px;
+	width: 265px;
 	box-shadow: 0 0 20px #111;
 	background-color: #fff;
 	position: absolute;
@@ -56,7 +56,7 @@ html, body, #root, main, .app, .map {
 	top: 80px;
 	padding: 1em;
 	z-index: 10;
-	height: 68vh;
+	height: 74vh;
 	overflow-y: auto;
 	transform: translateX(500px);
 	visibility: hidden;
@@ -96,6 +96,10 @@ html, body, #root, main, .app, .map {
 .list-item {
 	list-style-type: none;
 	padding: 0.2em;
+}
+.list-item:hover, .list-item:focus {
+	color: #e8a60c;
+	cursor: pointer;
 }
 .list-item:hover {
 	cursor: pointer;
@@ -185,7 +189,7 @@ html, body, #root, main, .app, .map {
 	margin: 1em auto;
 	background-color: #fff;
 	width: 280px;
-	height: 93%;
+	height: 88vh;
 	z-index: 1000000;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -232,4 +236,7 @@ html, body, #root, main, .app, .map {
 .flickr:hover, .flickr:focus {
 	color: #e8a60c;
 	outline: none;
+}
+.no-found {
+	margin-top: 1em;
 }
