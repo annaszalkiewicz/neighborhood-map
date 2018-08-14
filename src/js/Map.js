@@ -74,7 +74,7 @@ class Map extends Component {
     const key = '060c74d545a11b19611116873f118dba';
     let tags = this.state.currentPark.name;
 
-    fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&text=${tags}&tag_mode=all&content_type=1&sort=interestingness-desc&orientation=landscape&per_page=5&page=1&format=json&nojsoncallback=1`)
+    fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&text=${tags}&tag_mode=all&sort=interestingness-desc&per_page=5&page=1&format=json&nojsoncallback=1`)
       .then(response => response.json())
       .then((j) => {
 
@@ -226,7 +226,7 @@ class Map extends Component {
 
         this.setState({currentPark: parks[i]});
 
-        setTimeout(() => { this.openModal(); }, 100);
+        setTimeout(() => { this.openModal(); }, 600);
 
       });
 
@@ -384,7 +384,7 @@ class Map extends Component {
             </tr>
             <tr>
               <td className="info-heading">Website:</td>
-              <td className="info-details"><a href={currentPark.url}>{currentPark.url}</a></td>
+              <td className="info-details"><a href={currentPark.url} className="park-link" target="_blank">{currentPark.url}</a></td>
             </tr>
             <tr>
               <td className="info-heading">Area:</td>
@@ -399,8 +399,8 @@ class Map extends Component {
       </div>
 
             <div className="gallery">{images}</div>
-            <div className="powered-by">Powered by
-            <a href="https://flickr.com">Flickr</a>
+            <div className="powered-by">Photo gallery powered by
+            <a href="https://flickr.com" className="flickr"> Flickr</a>
             </div>
 
           </Modal>
