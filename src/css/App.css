@@ -127,6 +127,7 @@ html, body, #root, main, .app, .map {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	padding: 1em;
 }
 .logo-footer {
 	height: 35px;
@@ -138,8 +139,9 @@ html, body, #root, main, .app, .map {
 	color: #fff;
 	text-decoration: none;
 }
-.copyright a:hover {
+.copyright a:hover, .copyright a:focus {
 	color: #e8a60c;
+	outline: 0;
 }
 
 /* MODAL DIALOG */
