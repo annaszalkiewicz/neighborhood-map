@@ -168,13 +168,22 @@
     top: 160px;
   }
 }
-@media screen and (min-width: 1366px) and (orientation: landscape) {
+@media screen and (min-width: 1280px) and (orientation: landscape) {
+  .logo {
+    height: 83px;
+  }
   .header-heading {
     font-size: 4em;
   }
+  .hamburger-button {
+    top: 2.3em;
+  }
+  .hamburger-menu {
+    font-size: 90px;
+  }
   .Modal-Sidebar {
     top: 160px;
-    height: auto;
+    height: 65vh;
   }
 }
 
