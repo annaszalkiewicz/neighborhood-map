@@ -49,7 +49,8 @@ class Sidebar extends Component {
 				<Modal
 					isOpen={modalIsOpen}
 					onRequestClose={this.closeModal}
-					contentLabel="onRequestClose Example"
+					role="dialog"
+					contentLabel="Park's details page"
 					className="Modal-Sidebar"
 					overlayClassName="Overlay-sidebar"
 				>
