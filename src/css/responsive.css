@@ -1,4 +1,4 @@
-@media screen and (orientation: landscape) {
+@media screen and (min-width: 640px) and (orientation: landscape) {
   .Modal-Sidebar {
     height: 65vh;
   }
@@ -25,5 +25,28 @@
   .header-heading {
     display: block;
     margin-top: 8px;
+  }
+}
+@media screen and (min-width: 375px) and (orientation: portrait) {
+  .close-button {
+    margin: -10px auto auto 285px;
+  }
+}
+@media screen and (min-width: 412px) and (orientation: portrait) {
+  .header-heading {
+    font-size: 1.5em;
+    display: block;
+    margin-top: 15px;
+  }
+  .Modal {
+    width: 300px;
+  }
+  .close-button {
+    margin: -10px auto auto 285px;
+  }
+}
+@media screen and (min-width: 732px) and (orientation: landscape) {
+  .header-heading {
+    margin-top: 15px;
   }
 }
