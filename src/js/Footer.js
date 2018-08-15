@@ -8,7 +8,7 @@ const Footer = (() => {
 			<img src={Tree} alt="Logo" className="logo-footer"/>
 			<p className="copyright">
 				Written and coded by 
-				<a href="http://mywebgraphicdesign.com" target="_blank"> Anna Szalkiewicz</a>
+				<a href="http://mywebgraphicdesign.com" target="_blank" rel="noopener noreferrer"> Anna Szalkiewicz</a>
 			</p>
 		</footer>
 	);

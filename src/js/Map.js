@@ -81,7 +81,7 @@ class Map extends Component {
 					let url = 'https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '.jpg';
 					return (
 						<div className="image-container" key={pic.id}>
-							<a href={url} target="_blank">
+							<a href={url} target="_blank" rel="noopener noreferrer">
 								<img key={pic.id} src={url} className="gallery-image" alt={tags} />
 							</a>
 						</div>
@@ -367,7 +367,7 @@ class Map extends Component {
 									</tr>
 									<tr>
 										<td className="info-heading">Website:</td>
-										<td className="info-details"><a href={currentPark.url} className="park-link" target="_blank">{currentPark.url}</a></td>
+										<td className="info-details"><a href={currentPark.url} className="park-link" target="_blank" rel="noopener noreferrer">{currentPark.url}</a></td>
 									</tr>
 									<tr>
 										<td className="info-heading">Area:</td>
@@ -383,7 +383,7 @@ class Map extends Component {
 
 						<div className="gallery">{images}</div>
 						<div className="powered-by">Photo gallery powered by
-						<a href="https://flickr.com" className="flickr" target="_blank"> Flickr</a>
+						<a href="https://flickr.com" className="flickr" target="_blank" rel="noopener noreferrer"> Flickr</a>
 						</div>
 
 					</Modal>
@@ -419,7 +419,7 @@ class Map extends Component {
 									</tr>
 									<tr>
 										<td className="info-heading">Website:</td>
-										<td className="info-details"><a href={currentPark.url} className="park-link" target="_blank">{currentPark.url}</a></td>
+										<td className="info-details"><a href={currentPark.url} className="park-link" target="_blank" rel="noopener noreferrer">{currentPark.url}</a></td>
 									</tr>
 									<tr>
 										<td className="info-heading">Area:</td>
