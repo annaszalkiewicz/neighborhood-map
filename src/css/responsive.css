@@ -50,3 +50,131 @@
     margin-top: 15px;
   }
 }
+@media screen and (min-width: 600px) and (orientation: portrait) {
+  .Modal-Sidebar {
+    height: 77vh;
+    top: 115px;
+  }
+  .Modal {
+    width: 555px;
+    height: 93vh;
+  }
+  .close-button {
+    margin: -10px auto auto 540px;
+  }
+  .gallery {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .modal-heading {
+    margin: 0 1em;
+  }
+  .info-container {
+    margin-left: 1em;
+  }
+  .powered-by {
+    margin: 0 1em;
+  }
+  .header {
+    width: calc(100% - 2em);
+    padding: 1em;
+  }
+  .header-heading {
+    display: block;
+    font-size: 2em;
+    margin-top: 8px;
+  }
+  .hamburger-button {
+    top: 2em;
+  }
+}
+@media screen and (min-width: 854px) and (orientation: landscape) {
+  .header-heading {
+    margin-top: 8px;
+  }
+}
+@media screen and (min-width: 960px) and (orientation: landscape) {
+  .Modal {
+    width: 900px;
+    height: 88vh;
+  }
+  .close-button {
+    margin: -10px auto auto 885px;
+  }
+  .Modal-Sidebar {
+    height: 68vh;
+  }
+}
+@media screen and (min-width: 1024px) and (orientation: landscape) {
+  .header {
+    width: calc(100% - 2em);
+    padding: 1em;
+  }
+  .header-heading {
+    display: block;
+    font-size: 2em;
+    margin-top: 8px;
+  }
+  .hamburger-button {
+    top: 2em;
+  }
+  .Modal-Sidebar {
+    top: 115px;
+    height: 71vh;
+  }
+}
+@media screen and (min-width: 800px) and (orientation: portrait) {
+  .Modal {
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .Modal-Sidebar {
+    height: auto;
+  }
+}
+@media screen and (min-width: 1280px) and (orientation: landscape) {
+  .Modal {
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+@media screen and (min-width: 1024px) and (orientation: portrait) {
+  .Modal {
+    width: 900px;
+    height: auto;
+  }
+  .close-button {
+    margin: -10px auto auto 885px;
+  }
+  .logo {
+    height: 83px;
+  }
+  .header-heading {
+    font-size: 4em;
+  }
+  .hamburger-button {
+    top: 2.3em;
+  }
+  .hamburger-menu {
+    font-size: 90px;
+  }
+  .Modal-Sidebar {
+    top: 160px;
+  }
+}
+@media screen and (min-width: 1366px) and (orientation: landscape) {
+  .header-heading {
+    font-size: 4em;
+  }
+  .Modal-Sidebar {
+    top: 160px;
+    height: auto;
+  }
+}
+
