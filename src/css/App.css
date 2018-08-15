@@ -279,3 +279,15 @@ html, body, #root, main, .app, .map {
 .no-found {
 	margin-top: 1em;
 }
+
+/* GOOGLE MAPS */
+
+#map > div > div > div:nth-child(10), #map > div > div > div.gmnoprint.gm-style-cc {
+	bottom: 75px !important;
+}
+#map > div > div > div:nth-child(3) {
+	bottom: 70px !important;
+}
+#map > div > div > div:nth-child(5) {
+	bottom: 75px !important;
+}
