@@ -42,7 +42,7 @@ class Sidebar extends Component {
 
 			<section id="aside">
 
-				<button className="hamburger-button" onMouseUp={this.openModal}>
+				<button className="hamburger-button" onMouseUp={this.openModal} onKeyPress={this.openModal} aria-label="Click to open parks' list">
 					<i className="material-icons hamburger-menu">menu</i>
 				</button>
 

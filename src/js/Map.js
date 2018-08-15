@@ -81,8 +81,8 @@ class Map extends Component {
 					let url = 'https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '.jpg';
 					return (
 						<div className="image-container" key={pic.id}>
-							<a href={url} target="_blank" rel="noopener noreferrer">
-								<img key={pic.id} src={url} className="gallery-image" alt={tags} />
+							<a href={url} target="_blank" rel="noopener noreferrer" tabIndex="-1">
+								<img key={pic.id} src={url} className="gallery-image" alt={tags} tabIndex="0" aria-label={tags} />
 							</a>
 						</div>
 					)
@@ -350,7 +350,7 @@ class Map extends Component {
 						</button>
 
 						<h2 className="modal-heading">{currentPark.name}</h2>
-						<div className="info-container">
+						<section className="info-container">
 							<table>
 								<tbody>
 									<tr>
@@ -379,7 +379,7 @@ class Map extends Component {
 									</tr>
 								</tbody>
 							</table>
-						</div>
+						</section>
 
 						<div className="gallery">{images}</div>
 						<div className="powered-by">Photo gallery powered by
