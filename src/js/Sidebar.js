@@ -16,8 +16,16 @@ class Sidebar extends Component {
 
 	openModal = () => {
 
+		const { modalIsOpen } = this.state;
+
 		Modal.setAppElement('#aside');
-		this.setState({ modalIsOpen: true });
+
+		if (modalIsOpen) {
+			this.setState({ modalIsOpen: false });
+		}
+		else {
+			this.setState({ modalIsOpen: true });
+		}
 
 	}
 
@@ -66,6 +74,7 @@ class Sidebar extends Component {
 									key={park.id}
 									className="list-item"
 									onClick={(e) => handleClick(e)}
+									onKeyPress={(e) => handleClick(e)}
 									tabIndex="0"
 									aria-label={park.name}
 								>{park.name}</li>
