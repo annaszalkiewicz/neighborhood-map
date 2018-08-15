@@ -11,6 +11,7 @@ class App extends Component {
 
 		return (
 			<div className="app">
+				<a href="#menu" className="skip-link">Skip to content</a>
 				<Header />
 				<Map />
 				<Footer />
