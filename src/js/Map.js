@@ -72,7 +72,7 @@ class Map extends Component {
 		const key = '060c74d545a11b19611116873f118dba';
 		let tags = this.state.currentPark.name;
 
-		fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&text=${tags}&tag_mode=all&sort=interestingness-desc&per_page=5&page=1&format=json&nojsoncallback=1`)
+		fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&text=${tags}&tag_mode=all&sort=interestingness-desc&per_page=6&page=1&format=json&nojsoncallback=1`)
 			.then(response => response.json())
 			.then((j) => {
 
