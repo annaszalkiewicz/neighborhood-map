@@ -1,0 +1,29 @@
+@media screen and (orientation: landscape) {
+  .Modal-Sidebar {
+    height: 65vh;
+  }
+  .Modal {
+    width: 590px;
+    height: 82vh;
+  }
+  .close-button {
+    margin: -10px auto auto 575px;
+  }
+  .gallery {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .modal-heading {
+    margin: 0 1em;
+  }
+  .info-container {
+    margin-left: 1em;
+  }
+  .powered-by {
+    margin: 0 1em;
+  }
+  .header-heading {
+    display: block;
+    margin-top: 8px;
+  }
+}
