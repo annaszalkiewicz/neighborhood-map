@@ -16,6 +16,8 @@ class Sidebar extends Component {
 
 	openModal = () => {
 
+		// Method to open modal
+
 		const { modalIsOpen } = this.state;
 
 		Modal.setAppElement('#aside');
@@ -30,6 +32,8 @@ class Sidebar extends Component {
 	}
 
 	closeModal = () => {
+
+		// Method to close modal
 		this.setState({ modalIsOpen: false });
 	}
 

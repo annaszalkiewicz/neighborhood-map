@@ -8,6 +8,7 @@ html, body, #root, main, .app, .map {
 	overflow-x: hidden;
 	overflow-y: hidden;
 }
+
 /* HEADER */
 
 .header {
@@ -49,6 +50,7 @@ html, body, #root, main, .app, .map {
 }
 
 /* SIDEBAR */
+
 .Overlay-Sidebar {
 	position: absolute;
 	top: 0;
@@ -225,7 +227,6 @@ html, body, #root, main, .app, .map {
 	border-top: solid 1px #aaa;
 	padding: 1em 0 0 0;
 }
-
 .Modal {
 	margin: 1em auto;
 	background-color: #fff;
@@ -291,6 +292,9 @@ html, body, #root, main, .app, .map {
 #map > div > div > div:nth-child(5) {
 	bottom: 75px !important;
 }
+
+/* SKIP LINK */
+
 .skip-link {
 	background-color: #000;
 	color: #fff;

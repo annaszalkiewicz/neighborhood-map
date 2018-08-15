@@ -47,6 +47,7 @@ class Map extends Component {
 	}
 
 	loadJS = (src) => {
+		// https://www.klaasnotfound.com/2016/11/06/making-google-maps-work-with-react/
 		const ref = window.document.getElementsByTagName("script")[0];
 		const script = window.document.createElement("script");
 		script.src = src;
@@ -56,6 +57,8 @@ class Map extends Component {
 
 	openModal = () => {
 
+		// Method that fetch images and opens modal
+
 		this.fetchImages();
 
 		Modal.setAppElement('#root');
@@ -64,10 +67,14 @@ class Map extends Component {
 	}
 
 	closeModal = () => {
+
+		// Method that closes modal
 		this.setState({ modalIsOpen: false });
 	}
 
 	fetchImages = () => {
+
+		// Fetch images from flicks. If fetch is successfull - create image thumbnails, if not - manage error handling
 
 		const key = '060c74d545a11b19611116873f118dba';
 		let tags = this.state.currentPark.name;
@@ -101,6 +108,8 @@ class Map extends Component {
 	}
 
 	initMap = () => {
+
+		// This method creates Google map with custom map styles, add title to iframe for better accessibility and call addMarker()
 
 		const styles = [
 			{
@@ -192,6 +201,9 @@ class Map extends Component {
 	}
 
 	addMarker = () => {
+
+		//  Creates markers for all locations on map
+
 		let { markers, map, parks } = this.state;
 
 		for (let i = 0; i < parks.length; i++) {
@@ -214,6 +226,7 @@ class Map extends Component {
 
 			this.showListings();
 
+			// Event listener on marker click. It animates marker and opens modal
 
 			marker.addListener('click', () => {
 
@@ -232,8 +245,9 @@ class Map extends Component {
 		}
 	}
 
-	// This function will loop through the markers array and display them all.
 	showListings = () => {
+
+		// This method will loop through the markers array and display them all.
 
 		const { markers, map } = this.state;
 
@@ -264,6 +278,9 @@ class Map extends Component {
 	}
 
 	filterParks = (query) => {
+
+		// This method filter locations depending on query input 
+
 		let { markers, parks, map } = this.state;
 
 		let filteredParks, filteredMarkers;
@@ -316,12 +333,7 @@ class Map extends Component {
 		return (
 			<main>
 				<div ref="map" id="map" className="map" role="application"></div>
-				{/* <button
-					className="hamburger-button"
-					onMouseUp={this.handleMouseUp}
-				>
-					<i className="material-icons hamburger-menu">menu</i>
-				</button> */}
+
 				<Sidebar
 					parks={parks}
 					toggleSidebar={this.toggleSidebar}

@@ -5,9 +5,9 @@ import Tree from '../img/tree.svg';
 const Footer = (() => {
 	return (
 		<footer className="footer">
-			<img src={Tree} alt="Logo" className="logo-footer"/>
+			<img src={Tree} alt="Logo" className="logo-footer" />
 			<p className="copyright">
-				Written and coded by 
+				Written and coded by
 				<a href="http://mywebgraphicdesign.com" target="_blank" rel="noopener noreferrer"> Anna Szalkiewicz</a>
 			</p>
 		</footer>
