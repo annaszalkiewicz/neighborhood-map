@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 import Sidebar from './Sidebar';
 import parks from '../data/data.json';
 import icon from '../img/marker.png';
+import staticMap from '../img/static-map.jpg';
 
 class Map extends Component {
 
@@ -34,7 +35,8 @@ class Map extends Component {
 	componentDidMount = () => {
 
 		// Asynchronously load the Google Maps script, passing in the callback reference
-		this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyAf26YXhGHSk1MxVmC2BfMTG5EJp5gHUrA&callback=initMap');
+		this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyAf26YXhGHSk1MxVmC2BfMTG5EJp5gHUr&callback=initMap');
+		//this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyAf26YXhGHSk1MxVmC2BfMTG5EJp5gHUrA&callback=initMap');
 
 		//Create map on load
 		window.initMap = this.initMap;
@@ -44,6 +46,13 @@ class Map extends Component {
 
 		this.setState({ filteredMarkers: markers, filteredParks: parks });
 
+		// Handle authentication error
+		this.gm_authFailure();
+
+	}
+
+	gm_authFailure = () => {
+		alert('Error occured while loading map. Please try again later');
 	}
 
 	loadJS = (src) => {
@@ -170,49 +179,63 @@ class Map extends Component {
 				]
 			}
 		];
+		// Create google map only if there is internet connection
 
-		let map = new window.google.maps.Map(
-			document.getElementById('map'), {
-				zoom: 6,
-				center: { lat: 51.7730971, lng: 19.4105533 },
-				styles: styles,
-				mapTypeControl: false,
-				zoomControl: true,
-				zoomControlOptions: {
-					position: window.google.maps.ControlPosition.RIGHT_CENTER
-				},
-				scaleControl: true,
-				streetViewControl: true,
-				streetViewControlOptions: {
-					position: window.google.maps.ControlPosition.RIGHT_CENTER
-				},
-				fullscreenControl: true,
-				fullscreenControlOptions: {
-					position: window.google.maps.ControlPosition.RIGHT_CENTER
-				},
-			});
-		this.setState({ map: map });
+		if (navigator.onLine) {
+			let map = new window.google.maps.Map(
+				document.getElementById('map'), {
+					zoom: 6,
+					center: { lat: 51.7730971, lng: 19.4105533 },
+					styles: styles,
+					mapTypeControl: false,
+					zoomControl: true,
+					zoomControlOptions: {
+						position: window.google.maps.ControlPosition.RIGHT_CENTER
+					},
+					scaleControl: true,
+					streetViewControl: true,
+					streetViewControlOptions: {
+						position: window.google.maps.ControlPosition.RIGHT_CENTER
+					},
+					fullscreenControl: true,
+					fullscreenControlOptions: {
+						position: window.google.maps.ControlPosition.RIGHT_CENTER
+					},
+				});
+			this.setState({ map: map });
 
-		// Construct the circle for each value in parks.
-		// Note: We scale the area of the circle based on the area.
-		for (let park in parks) {
-			// Add the circle for this city to the map.
-			const parkCircle = new window.google.maps.Circle({
-				strokeColor: '#000',
-				strokeOpacity: 0.8,
-				strokeWeight: 2,
-				fillColor: '47ff0d',
-				fillOpacity: 0.35,
-				map: map,
-				center: parks[park].latlng,
-				radius: Math.sqrt(parks[park].area) * 1000
+			// Construct the circle for each value in parks.
+			// Note: We scale the area of the circle based on the area.
+			for (let park in parks) {
+				// Add the circle for this city to the map.
+				const parkCircle = new window.google.maps.Circle({
+					strokeColor: '#000',
+					strokeOpacity: 0.8,
+					strokeWeight: 2,
+					fillColor: '47ff0d',
+					fillOpacity: 0.35,
+					map: map,
+					center: parks[park].latlng,
+					radius: Math.sqrt(parks[park].area) * 1000
+				});
+			}
+
+			window.google.maps.event.addListenerOnce(map, 'idle', () => {
+				document.getElementsByTagName('iframe')[0].title = 'Google  Maps';
 			});
+			this.addMarker();
 		}
+		else {
 
-		window.google.maps.event.addListenerOnce(map, 'idle', () => {
-			document.getElementsByTagName('iframe')[0].title = 'Google  Maps';
-		});
-		this.addMarker();
+			// If internet is not available, use static map image.
+
+			const map = document.getElementById('map');
+			const staticImg = document.createElement('img');
+			map.appendChild(staticMap);
+			staticImg.classList.add('offline-map');
+			staticImg.setAttribute('src', staticMap);
+			staticImg.setAttribute('alt', 'static map');
+		}
 
 	}
 
@@ -347,6 +370,7 @@ class Map extends Component {
 		let { markers, map, parks, filteredMarkers, filteredParks, query, infoWindow, images, modalIsOpen, currentPark } = this.state;
 
 		return (
+
 			<main>
 				<div ref="map" id="map" className="map" role="application"></div>
 

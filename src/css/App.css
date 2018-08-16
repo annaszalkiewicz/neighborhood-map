@@ -310,3 +310,11 @@ html, body, #root, main, .app, .map {
 	outline: none;
 	transition: all 0.3s ease;
 }
+
+/* OFFLINE MAP */
+
+.offline-map {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
