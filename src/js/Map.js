@@ -22,7 +22,8 @@ class Map extends Component {
 			query: '',
 			filteredMarkers: [],
 			filteredParks: [],
-			modalIsOpen: false
+			modalIsOpen: false,
+			error: false
 		};
 		this.fetchImages = this.fetchImages.bind(this);
 		this.filterParks = this.filterParks.bind(this);
@@ -35,8 +36,7 @@ class Map extends Component {
 	componentDidMount = () => {
 
 		// Asynchronously load the Google Maps script, passing in the callback reference
-		this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyAf26YXhGHSk1MxVmC2BfMTG5EJp5gHUr&callback=initMap');
-		//this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyAf26YXhGHSk1MxVmC2BfMTG5EJp5gHUrA&callback=initMap');
+		this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyAf26YXhGHSk1MxVmC2BfMTG5EJp5gHUrA&callback=initMap');
 
 		//Create map on load
 		window.initMap = this.initMap;
@@ -46,13 +46,11 @@ class Map extends Component {
 
 		this.setState({ filteredMarkers: markers, filteredParks: parks });
 
-		// Handle authentication error
-		this.gm_authFailure();
+		// Error handling when there is problem with Google map authorization 
+		window.gm_authFailure = () => {
+			alert('Sorry, there was problem while loading map. Please check your API key.')
+		}
 
-	}
-
-	gm_authFailure = () => {
-		alert('Error occured while loading map. Please try again later');
 	}
 
 	loadJS = (src) => {
@@ -107,7 +105,11 @@ class Map extends Component {
 				this.setState({ images: pics });
 
 			})
-			.catch(e => this.requestError(e, 'image'));
+			.catch((error) => {
+
+				this.setState({ error: true })
+
+			});
 
 	}
 
@@ -223,6 +225,10 @@ class Map extends Component {
 			window.google.maps.event.addListenerOnce(map, 'idle', () => {
 				document.getElementsByTagName('iframe')[0].title = 'Google  Maps';
 			});
+
+			window.gm_authfailure = () => {
+				alert('Error occured with authentication while loading map. Please check your API key');
+			}
 			this.addMarker();
 		}
 		else {
@@ -367,7 +373,7 @@ class Map extends Component {
 
 	render() {
 
-		let { markers, map, parks, filteredMarkers, filteredParks, query, infoWindow, images, modalIsOpen, currentPark } = this.state;
+		let { markers, map, parks, filteredMarkers, filteredParks, query, infoWindow, images, modalIsOpen, currentPark, error } = this.state;
 
 		return (
 
@@ -389,111 +395,70 @@ class Map extends Component {
 					handleClick={this.handleClick}
 				/>
 
-				{images.length !== 0 && (
-					<Modal
-						isOpen={modalIsOpen}
-						onRequestClose={this.closeModal}
-						role="dialog"
-						contentLabel="Park's details page"
-						className="Modal"
-						overlayClassName="Overlay"
-					>
-						<button className="close-button" onClick={this.closeModal}>
-							<i className="material-icons">close</i>
-						</button>
+				<Modal
+					isOpen={modalIsOpen}
+					onRequestClose={this.closeModal}
+					role="dialog"
+					contentLabel="Park's details page"
+					className="Modal"
+					overlayClassName="Overlay"
+				>
+					<button className="close-button" onClick={this.closeModal}>
+						<i className="material-icons">close</i>
+					</button>
 
-						<h2 className="modal-heading">{currentPark.name}</h2>
-						<section className="info-container">
-							<table>
-								<tbody>
-									<tr>
-										<td className="info-heading">Origin:</td>
-										<td className="info-details">{currentPark.origin}</td>
-									</tr>
-									<tr>
-										<td className="info-heading">Seat:</td>
-										<td className="info-details">{currentPark.seat}</td>
-									</tr>
-									<tr>
-										<td className="info-heading">Telephone:</td>
-										<td className="info-details">{currentPark.telephone}</td>
-									</tr>
-									<tr>
-										<td className="info-heading">Website:</td>
-										<td className="info-details"><a href={currentPark.url} className="park-link" target="_blank" rel="noopener noreferrer">{currentPark.url}</a></td>
-									</tr>
-									<tr>
-										<td className="info-heading">Area:</td>
-										<td className="info-details">{currentPark.area} km&sup2;</td>
-									</tr>
-									<tr>
-										<td className="info-heading">Established:</td>
-										<td className="info-details">{currentPark.year} year</td>
-									</tr>
-								</tbody>
-							</table>
-						</section>
+					<h2 className="modal-heading">{currentPark.name}</h2>
+					<section className="info-container">
+						<table>
+							<tbody>
+								<tr>
+									<td className="info-heading">Origin:</td>
+									<td className="info-details">{currentPark.origin}</td>
+								</tr>
+								<tr>
+									<td className="info-heading">Seat:</td>
+									<td className="info-details">{currentPark.seat}</td>
+								</tr>
+								<tr>
+									<td className="info-heading">Telephone:</td>
+									<td className="info-details">{currentPark.telephone}</td>
+								</tr>
+								<tr>
+									<td className="info-heading">Website:</td>
+									<td className="info-details"><a href={currentPark.url} className="park-link" target="_blank" rel="noopener noreferrer">{currentPark.url}</a></td>
+								</tr>
+								<tr>
+									<td className="info-heading">Area:</td>
+									<td className="info-details">{currentPark.area} km&sup2;</td>
+								</tr>
+								<tr>
+									<td className="info-heading">Established:</td>
+									<td className="info-details">{currentPark.year} year</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
 
-						<div className="gallery">{images}</div>
-						<div className="powered-by">Photo gallery powered by
-						<a href="https://flickr.com" className="flickr" target="_blank" rel="noopener noreferrer"> Flickr</a>
-						</div>
+					<div className="gallery">{images}</div>
 
-					</Modal>
-				)}
-
-				{images.length === 0 && (
-					<Modal
-						isOpen={modalIsOpen}
-						onRequestClose={this.closeModal}
-						contentLabel="onRequestClose Example"
-						className="Modal"
-						overlayClassName="Overlay"
-					>
-						<button className="close-button" onClick={this.closeModal}>
-							<i className="material-icons">close</i>
-						</button>
-
-						<h2 className="info-heading">{currentPark.name}</h2>
-						<div className="info-container">
-							<table>
-								<tbody>
-									<tr>
-										<td className="info-heading">Origin:</td>
-										<td className="info-details">{currentPark.origin}</td>
-									</tr>
-									<tr>
-										<td className="info-heading">Seat:</td>
-										<td className="info-details">{currentPark.seat}</td>
-									</tr>
-									<tr>
-										<td className="info-heading">Telephone:</td>
-										<td className="info-details">{currentPark.telephone}</td>
-									</tr>
-									<tr>
-										<td className="info-heading">Website:</td>
-										<td className="info-details"><a href={currentPark.url} className="park-link" target="_blank" rel="noopener noreferrer">{currentPark.url}</a></td>
-									</tr>
-									<tr>
-										<td className="info-heading">Area:</td>
-										<td className="info-details">{currentPark.area} km&sup2;</td>
-									</tr>
-									<tr>
-										<td className="info-heading">Established:</td>
-										<td className="info-details">{currentPark.year} year</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+					{images.length === 0 && !error && (
 						<div className="no-found">
 							Sorry, we didn't find any image.
-						</div>
+							</div>
+					)}
 
-					</Modal>
+					{error && (
+						<div className="no-found">
+							Sorry, there was a problem with fetching images.
+							</div>
+					)}
 
-				)}
+					<div className="powered-by">Photo gallery powered by <a href="https://flickr.com" className="flickr" target="_blank" rel="noopener noreferrer"> Flickr</a>
+					</div>
 
-			</main>
+				</Modal>
+
+			</main >
 		);
 	}
 }

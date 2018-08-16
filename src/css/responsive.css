@@ -29,7 +29,7 @@
 }
 @media screen and (min-width: 375px) and (orientation: portrait) {
   .close-button {
-    margin: -10px auto auto 285px;
+    margin: -10px auto auto 265px;
   }
 }
 @media screen and (min-width: 412px) and (orientation: portrait) {
