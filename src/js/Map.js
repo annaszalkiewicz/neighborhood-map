@@ -193,6 +193,22 @@ class Map extends Component {
 			});
 		this.setState({ map: map });
 
+		// Construct the circle for each value in parks.
+		// Note: We scale the area of the circle based on the area.
+		for (let park in parks) {
+			// Add the circle for this city to the map.
+			const parkCircle = new window.google.maps.Circle({
+				strokeColor: '#000',
+				strokeOpacity: 0.8,
+				strokeWeight: 2,
+				fillColor: '47ff0d',
+				fillOpacity: 0.35,
+				map: map,
+				center: parks[park].latlng,
+				radius: Math.sqrt(parks[park].area) * 1000
+			});
+		}
+
 		window.google.maps.event.addListenerOnce(map, 'idle', () => {
 			document.getElementsByTagName('iframe')[0].title = 'Google  Maps';
 		});
