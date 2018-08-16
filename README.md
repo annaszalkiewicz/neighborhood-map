@@ -46,7 +46,7 @@ $ serve -s build
 ```
 Like many of serve’s internal settings, the port can be adjusted using the `-p` or `--port` flags.
 
-4. Open project on loac server `localhost:5000`
+4. Open project on local server `localhost:5000`
 
 ## Dependencies
 
