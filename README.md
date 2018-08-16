@@ -52,9 +52,7 @@ Like many of serve’s internal settings, the port can be adjusted using the `-p
 
 * [React](https://reactjs.org/)
 * [React DOM](https://www.npmjs.com/package/react-dom)
-* [React Router DOM](https://www.npmjs.com/package/react-router-dom)
 * [React Modal](https://www.npmjs.com/package/react-modal)
-* [Prop-Types](https://www.npmjs.com/package/prop-types)
 * [Font Montserrat on Google](https://fonts.google.com/specimen/Montserrat)
 * [Font Pacifico on Google](https://fonts.google.com/specimen/Pacifico)
 * [Material Icons](https://material.io/tools/icons/?style=baseline)
