@@ -35,11 +35,10 @@ You can change port by editing `package.json` file. In line 16 `"start": " set P
 This project use service workers and cache its content. Set up your favorite HTTP server so that a visitor to your site is served index.html, and requests to static paths like /static/js/main.<hash>.js are served with the contents of the /static/js/main.<hash>.js file. Service worker runs only on production `build` directory. If you would like to test it on your local machine, please follow this guide: 
 
 1. Make sure you have installed [Node](https://nodejs.org/).
-```
+
 2. Install [Serve](https://github.com/zeit/serve).
 ```
 $ npm install -g serve
-```
 ```
 3. Serve your static site on the port 5000. 
 ```
@@ -48,7 +47,6 @@ $ serve -s build
 Like many of serve’s internal settings, the port can be adjusted using the `-p` or `--port` flags.
 
 4. Open project on loac server `localhost:5000`
-```
 
 ## Dependencies
 
