@@ -113,11 +113,6 @@ class Map extends Component {
 
 	}
 
-	requestError = (e) => {
-		console.log(e);
-
-	}
-
 	initMap = () => {
 
 		// This method creates Google map with custom map styles, add title to iframe for better accessibility and call addMarker()
@@ -181,73 +176,65 @@ class Map extends Component {
 				]
 			}
 		];
-		// Create google map only if there is internet connection
 
-		if (navigator.onLine) {
-			let map = new window.google.maps.Map(
-				document.getElementById('map'), {
-					zoom: 6,
-					center: { lat: 51.7730971, lng: 19.4105533 },
-					styles: styles,
-					mapTypeControl: false,
-					zoomControl: true,
-					zoomControlOptions: {
-						position: window.google.maps.ControlPosition.RIGHT_CENTER
-					},
-					scaleControl: true,
-					streetViewControl: true,
-					streetViewControlOptions: {
-						position: window.google.maps.ControlPosition.RIGHT_CENTER
-					},
-					fullscreenControl: true,
-					fullscreenControlOptions: {
-						position: window.google.maps.ControlPosition.RIGHT_CENTER
-					},
-				});
-			this.setState({ map: map });
-
-			// Construct the circle for each value in parks.
-			// Note: We scale the area of the circle based on the area.
-			for (let park in parks) {
-				// Add the circle for this city to the map.
-				const parkCircle = new window.google.maps.Circle({
-					strokeColor: '#000',
-					strokeOpacity: 0.8,
-					strokeWeight: 2,
-					fillColor: '47ff0d',
-					fillOpacity: 0.35,
-					map: map,
-					center: parks[park].latlng,
-					radius: Math.sqrt(parks[park].area) * 1000
-				});
-			}
-
-			window.google.maps.event.addListenerOnce(map, 'idle', () => {
-				document.getElementsByTagName('iframe')[0].title = 'Google  Maps';
+		let map = new window.google.maps.Map(
+			document.getElementById('map'), {
+				zoom: 6,
+				center: { lat: 51.7730971, lng: 19.4105533 },
+				styles: styles,
+				mapTypeControl: false,
+				zoomControl: true,
+				zoomControlOptions: {
+					position: window.google.maps.ControlPosition.RIGHT_CENTER
+				},
+				scaleControl: true,
+				streetViewControl: true,
+				streetViewControlOptions: {
+					position: window.google.maps.ControlPosition.RIGHT_CENTER
+				},
+				fullscreenControl: true,
+				fullscreenControlOptions: {
+					position: window.google.maps.ControlPosition.RIGHT_CENTER
+				},
 			});
+		this.setState({ map: map });
 
-			window.gm_authfailure = () => {
-				alert('Error occured with authentication while loading map. Please check your API key');
-			}
-			this.addMarker();
+		// Construct the circle for each value in parks.
+		// Note: We scale the area of the circle based on the area.
+		for (let park in parks) {
+			// Add the circle for this city to the map.
+			const parkCircle = new window.google.maps.Circle({
+				strokeColor: '#000',
+				strokeOpacity: 0.8,
+				strokeWeight: 2,
+				fillColor: '47ff0d',
+				fillOpacity: 0.35,
+				map: map,
+				center: parks[park].latlng,
+				radius: Math.sqrt(parks[park].area) * 1000
+			});
 		}
-		else {
 
-			// If internet is not available, use static map image.
+		window.google.maps.event.addListenerOnce(map, 'idle', () => {
+			document.getElementsByTagName('iframe')[0].title = 'Google  Maps';
+		});
 
-			const map = document.getElementById('map');
-			const staticImg = document.createElement('img');
-			map.appendChild(staticMap);
-			staticImg.classList.add('offline-map');
-			staticImg.setAttribute('src', staticMap);
-			staticImg.setAttribute('alt', 'static map');
+		// If thre is no internet connection, inform that static map is loaded
+		if (!navigator.onLine) {
+			alert('You lost internet connection. Application will load static image.');
 		}
+
+		// Error handling when there is a problem with authentication
+		window.gm_authfailure = () => {
+			alert('Error occured with authentication while loading map. Please check your API key');
+		}
+		this.addMarker();
 
 	}
 
 	addMarker = () => {
 
-		//  Creates markers for all locations on map
+		// Creates markers for all locations on map
 
 		let { markers, map, parks } = this.state;
 
@@ -378,7 +365,14 @@ class Map extends Component {
 		return (
 
 			<main>
-				<div ref="map" id="map" className="map" role="application"></div>
+
+				{navigator.onLine &&
+					<div ref="map" id="map" className="map" role="application"></div>
+				}
+
+				{!navigator.onLine &&
+					<img src={staticMap} alt="Offline Map" className="offline-map" />
+				}
 
 				<Sidebar
 					parks={parks}
