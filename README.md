@@ -36,17 +36,22 @@ This project use service workers and cache its content. Set up your favorite HTT
 
 1. Make sure you have installed [Node](https://nodejs.org/).
 
-2. Install [Serve](https://github.com/zeit/serve).
+2. Create `build` folder
+```
+$ npm run build
+```
+
+3. Install [Serve](https://github.com/zeit/serve).
 ```
 $ npm install -g serve
 ```
-3. Serve your static site on the port 5000. 
+4. Serve your static site on the port 5000. 
 ```
 $ serve -s build
 ```
 Like many of serve’s internal settings, the port can be adjusted using the `-p` or `--port` flags.
 
-4. Open project on local server `localhost:5000`
+5. Open project on local server `localhost:5000`
 
 ## Dependencies
 
