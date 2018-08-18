@@ -23,7 +23,8 @@ class Map extends Component {
 			filteredMarkers: [],
 			filteredParks: [],
 			modalIsOpen: false,
-			error: false
+			error: false,
+			mapError: false
 		};
 		this.fetchImages = this.fetchImages.bind(this);
 		this.filterParks = this.filterParks.bind(this);
@@ -51,6 +52,10 @@ class Map extends Component {
 			alert('Sorry, there was problem while loading map. Please check your API key.')
 		}
 
+		window.onError = () => {
+			alert('Sorry, a problem occured while loading a map. Please try again later')
+		}
+
 	}
 
 	loadJS = (src) => {
@@ -59,7 +64,10 @@ class Map extends Component {
 		const script = window.document.createElement("script");
 		script.src = src;
 		script.async = true;
+		script.defer = true;
 		ref.parentNode.insertBefore(script, ref);
+		script.onerror = this.setState({ mapError: true });
+
 	}
 
 	openModal = () => {
@@ -360,18 +368,22 @@ class Map extends Component {
 
 	render() {
 
-		let { markers, map, parks, filteredMarkers, filteredParks, query, infoWindow, images, modalIsOpen, currentPark, error } = this.state;
+		let { markers, map, parks, filteredMarkers, filteredParks, query, infoWindow, images, modalIsOpen, currentPark, error, mapError } = this.state;
 
 		return (
 
 			<main>
 
-				{navigator.onLine &&
-					<div ref="map" id="map" className="map" role="application"></div>
+				{!navigator.onLine || mapError &&
+					<img src={staticMap} alt="Offline Map" className="offline-map" />
 				}
 
-				{!navigator.onLine &&
-					<img src={staticMap} alt="Offline Map" className="offline-map" />
+				{mapError && 
+					alert("There was a problem to load map.Please check your internet connection.")
+				}
+
+				{navigator.onLine &&
+					<div ref="map" id="map" className="map" role="application"></div>
 				}
 
 				<Sidebar
