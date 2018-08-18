@@ -374,12 +374,16 @@ class Map extends Component {
 
 			<main>
 
-				{!navigator.onLine || mapError &&
+				{!navigator.onLine &&
+					<img src={staticMap} alt="Offline Map" className="offline-map" />
+				}
+
+				{mapError &&
 					<img src={staticMap} alt="Offline Map" className="offline-map" />
 				}
 
 				{mapError && 
-					alert("There was a problem to load map.Please check your internet connection.")
+					alert("There was a problem to load map. Please check your internet connection. Application will use static map instead.")
 				}
 
 				{navigator.onLine &&
